@@ -1,0 +1,260 @@
+﻿@{
+	ViewData["Title"] = "Rulesetupdetail";
+	Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+<!Doctype html>
+<html>
+<head>
+	<title></title>
+	<style>
+		.error_show {
+			color: red;
+			margin-left: 10px;
+		}
+
+		.k-grid.k-widget {
+			height: 360px;
+		}
+
+		.k-grid-header th.k-header > .k-link {
+			width: 100px;
+		}
+
+		.k-grid-header {
+			font-weight: bold;
+		}
+
+		.k-state-active {
+			display: none;
+		}
+
+		.k-content {
+			font-weight: normal;
+			font-size: 13px;
+		}
+
+		.k-widget.k-window {
+			padding-top: 35px;
+			min-width: 90px;
+			min-height: 50px;
+			width: 700px !important;
+			height: 300px !important;
+			top: 180.766px !important;
+			/*left: 120px !important;*/
+			z-index: 10003;
+			left: 300px !important;
+		}
+	</style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+	<div class="content-wrapper">
+		<div class="container-xxl flex-grow-1 container-p-y">
+			<div class="card-body" style="margin-top:-33px;">
+				<form method="post" class="form-horizontal" id="form" enctype="multipart/form-data">
+					<div class="row" style="margin-top: -18px;margin-bottom: 10px;">
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="organization" class="form-label">Rule Code</label>
+									<input class="form-control" type="text" name="coursedesc" id="coursedesc" value="BAT2306120004" disabled>
+								</div>
+								<div class="col-sm-4">
+									<label for="organization" class="form-label">Mode</label>
+									<input class="form-control" type="text" name="coursedesc" id="coursedesc" value="Create" disabled>
+								</div>
+								<div class="col-sm-4">
+									<label for="organization" class="form-label">Status</label><br>
+									<select id="mode" class="form-select form-control">
+										<option value="A">Active</option>
+										<option value="I">InActive</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-5">
+						</div>
+						<div class="col-sm-1" style="margin-top:20px;">
+							<center>
+								<a href="../Rulesetup/Rulesetup"><img style="cursor:pointer;" src="~/Content/images/toplist.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+							</center>
+						</div>
+					</div>
+					<div class="box box-orange" style="height:auto">
+						<div class="row" style="padding-bottom:5px;margin-top:5px;padding-right:5px">
+							<div class="col-sm-4">
+								<label for="" class="form-label">Recon Name&nbsp;</label>
+								<select id="mode" class="form-select form-control">
+									<option value="1">Hdfc BRS-123456</option>
+									<option value="1">SBI CC BRS</option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<label for="" class="form-label">Rule Name</label>
+								<input class="form-control" id="AccountName" name="AccountName" type="text" value="Hdfc CC- Cheque Collection From Customer" data-bind="value:AccountName" style=" width:92%;">
+							</div>
+							<div class="col-sm-2">
+								<label for="" class="form-label">Period From</label>
+								<div>
+									<input class="cusDate" data-role='datepicker' id="period_from" name="period_from" data-value="2022-12-21" onclick="Dateformat()" style="width:100%" />
+									<span data-for='valid' class='k-invalid-msg'></span>
+								</div>
+							</div>
+
+							<div class="col-sm-2">
+								<label for="organization" class="form-label">
+									<span>Period To</span>&nbsp;&nbsp;&nbsp;&nbsp;
+									<input class="form-check-input" style="margin: 0px;" type="checkbox" value="false" name="untillactive" onclick="checkactive()" id="untillactive" />&nbsp;&nbsp;
+									<span style="font-size:14px;">Until Active</span>
+								</label>
+								<div>
+									<input class="cusDate" data-role='datepicker' id="period_to" onclick="Dateformat()" style="height:25px;width: 100%;" data-bind="" onkeypress="return date_validate(event)" /><span data-for='valid' class='k-invalid-msg'></span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" style="padding-bottom:8px;padding-top:8px;padding-right:5px">
+							<div class="col-sm-4"></div>							
+							<div class="col-sm-4">
+								<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
+								<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="window.location.href = '/Rulesetup/Rulesetup'">Cancel</button>
+							</div>
+							<div class="col-sm-4"></div>
+						</div>
+						<div class="row" style="padding-bottom:8px;padding-top:8px;padding-right:30px">
+							<div class="table-responsive text-nowrap">
+								<i data-bs-toggle="modal" data-bs-target="#newdebit"  class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green; cursor: pointer"></i>
+								<table class="table table-bordered table-sm">
+									<thead style="background: #c1c1c1;">
+										<tr class="text-nowrap">
+											<th>Action</th>
+											<th>Base Field</th>
+											<th>Extraction criteria</th>
+											<th>Target Field</th>
+											<th>Comparison criteria</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="height:25px;">
+											<td align="center"><i data-bs-toggle="modal" data-bs-target="#viewdebit" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red;" aria-hidden="true"></i></td>
+											<td>Narration</td>
+											<td>SPLIT($FIELD$,'-',3)</td>
+											<td>Cheque No</td>
+											<td>EXACT</td>
+											<td>Active</td>
+										</tr>
+										<tr style="height:25px;">
+											<td align="center"><i data-bs-toggle="modal" data-bs-target="#viewdebit" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red;" aria-hidden="true"></i></td>
+											<td>Tran Date</td>
+											<td>EXACT</td>
+											<td>Cheque Date</td>
+											<td>EXACT</td>
+											<td>Active</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="newdebit" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				</div>
+				<div class="modal-body" style="margin-top: -26px;">
+					<div class="row">
+						<div class="col-sm-4">
+						</div>
+						<div class="col-sm-4">
+							<h4 style="font-size: 15px;text-align: center;color: #1a9950;font-weight: 600;">New</h4>
+						</div>
+						<div class="col-sm-4">
+							<i class="bx bx-x cursor-pointer" data-bs-dismiss="modal" style="color: #000000;float:right"></i>
+						</div>
+					</div>
+					<hr style="margin-top:-1px; width:100%;">
+					<div class="container">
+						<div class="row" style="padding-bottom:5px;margin-top:5px;padding-left:30px;padding-right:5px">
+							<div class="col-sm-6">
+								<label for="" class="form-label">Sl No</label>
+								<input class="form-control" id="slno" name="slno" type="text" value="0" data-bind="value:0">
+							</div>
+
+							<div class="col-sm-6">
+								<label for="" class="form-label">Status</label>
+								<div style="margin-left:2px;margin-top:5px">
+									<input type="radio" name="Status2" value="Y" checked="checked">&nbsp;&nbsp;Active
+									<input type="radio" style="margin-left: 10px;" name="Status2" value="N">&nbsp;&nbsp;InActive
+								</div>
+							</div>
+						</div>
+
+						<div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:30px;padding-right:5px">
+
+							<div class="col-sm-6">
+								<label for="" class="form-label">Base Field</label>
+								<select id="mode" class="form-select form-control">
+									<option value="1" selected>Narration</option>
+									<option value="2">Tran Date</option>
+
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<label for="" class="form-label">Target Field</label>
+								<select id="mode" class="form-select form-control">
+									<option value="1">Cheque No</option>
+									<option value="2" selected>Cheque Date</option>
+								</select>
+							</div>
+						</div>
+						<div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:30px;padding-right:5px">
+							<div class="col-sm-6">
+								<label for="" class="form-label">Extraction Criteria </label>
+								<textarea class="form-control" id="extraction" name="extraction" type="text" value="" data-bind="value:Extraction Criteria" rows="4" cols="20"></textarea>
+							</div>
+
+							<div class="col-sm-6">
+								<label for="" class="form-label">Comparision Criteria  </label>
+								<textarea class="form-control" id="Comparision" name="Comparision" type="text" value="" data-bind="value:Comparision Criteria" rows="4" cols="20"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:30px;padding-right:5px">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+						</div>
+						<div class="col-sm-4">
+							<center>
+								<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
+								<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr1()">Cancel</button>
+							</center>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#navhead").text("Rule Setup");
+		kendodate_format();
+	});
+
+	function rr() {
+		$("#newdebit").show();
+	}
+	function rr1() {
+		$("#newdebit").hide();
+	}
+</script>

@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewData["Title"] = "DataSetList";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+<!Doctype html>
+<html>
+<head>
+    <title></title>
+    <style>
+        .error_show {
+            color: red;
+            margin-left: 10px;
+        }
+
+        .k-grid.k-widget {
+            height: 360px;
+        }
+
+        .k-grid-header th.k-header > .k-link {
+            width: 100px;
+        }
+
+        .k-grid-header {
+            font-weight: bold;
+        }
+
+        .k-state-active {
+            display: none;
+        }
+
+        .k-content {
+            font-weight: normal;
+            font-size: 13px;
+        }
+
+        .k-widget.k-window {
+            padding-top: 35px;
+            min-width: 90px;
+            min-height: 50px;
+            width: 700px !important;
+            height: 300px !important;
+            top: 180.766px !important;
+            /*left: 120px !important;*/
+            z-index: 10003;
+            left: 300px !important;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="card-body" style="margin-top:-33px;">               
+            <div class="row" style="margin-top:10px">
+                <div class="table-responsive text-nowrap" style="margin-top: -20px;">
+                    <a href="../DataSet/DataSetForm"><i class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green;font-size:15px;"></i></a>
+                    <table class="table table-bordered table-sm">
+                        <thead style="background: #c1c1c1;">
+                            <tr class="text-nowrap">
+                                <th>Action</th>
+                                <th>Dataset code</th>
+                                <th>Dataset Name</th>
+                                <th>Category</th>                               
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="height:25px;">
+                                    <td align="center"><a href="../DataSet/DataSetForm"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></a></td>
+                                <td>DS/060923/001</td>
+                                <td>Hdfc Bank- 123456</td>
+                                    <td>Bank Statement</td>
+                                <td>Active</td>                               
+                            </tr>
+                            <tr style="height:25px;">
+                                    <td align="center"><a href="../DataSet/DataSetForm"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></a></td>
+                                    <td>DS/060923/002</td>
+                                    <td>Invoice-Flexi</td>
+                                    <td>Invoice</td>
+                                    <td>Active</td>
+                                </tr>
+                            <tr style="height:25px;">
+                                    <td align="center"><a href="../DataSet/DataSetForm"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></a></td>
+                                    <td>DS/060923/003</td>
+                                    <td>Hdfc Ledger-00234123</td>
+                                    <td>Ledger</td>
+                                    <td>Active</td>
+                                </tr>
+                                <tr style="height:25px;">
+                                    <td align="center"><a href="../DataSet/DataSetForm"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></a></td>
+                                    <td>DS/060923/004</td>
+                                    <td>GRN-Flexi</td>
+                                    <td>GRN</td>
+                                    <td>Active</td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#navhead").text("Dataset");
+    });
+</script>
