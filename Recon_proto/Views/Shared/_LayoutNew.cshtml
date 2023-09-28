@@ -8,14 +8,6 @@
 	  data-template="vertical-menu-template" style="overflow:hidden">
 <head>
 	<style type="text/css">
-		body{
-			font-size:14px;
-		}
-
-		table{
-			font-size: 14px !important
-		}
-
 		.k-grid td {
 			border-style: solid;
 			border-width: 0 0 0 1px;
@@ -149,26 +141,13 @@
 	<meta name="viewport"
 		  content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 	<meta name="description" content="" />
-	<!-- Ionicons -->
 	<link href="~/Content/css/bower_components/Ionicons/css/ionicons.min.css" rel="stylesheet" />
-	<!-- Morris chart -->
-	<!-- jvectormap -->
-	<!-- Date Picker -->
 	<link href="~/Content/css/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
-	<!-- Daterange picker -->
 	<link href="~/Content/css/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-	<!-- bootstrap wysihtml5 - text editor -->
 	<link href="~/Content/css/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
 	<link href="~/Content/css/dist/css/dms.css" rel="stylesheet" />
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	<!-- Google Font -->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+@*	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+*@
 	<link href="@Url.Content("~/Content/kendo1/2015.1.318/kendo.common.min.css")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Content/kendo1/2015.1.318/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
 	<link href="@Url.Content("~/Content/kendo1/2015.1.318/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
@@ -182,49 +161,32 @@
 	<script src="@Url.Content("~/Scripts/kendo1/2015.1.318/kendo.aspnetmvc.min.js")"></script>
 	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
 	<script src="@Url.Content("~/Scripts/jquery-ui-datepicker.js")" type="text/javascript"></script>
-
-	@*side doggle bar script*@
 	<script src="~/Content/css/dist/js/adminlte.min.js"></script>
-
-	@*Css and Js for Jquery alert box*@
 	<script src="~/Scripts/jquery-confirm.min.js"></script>
 	<link href="~/Content/css/jquery-confirm.min.css" rel="stylesheet" />
-
-	@*/*dashboard chart*/*@
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	@*<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link id="load-css-0" rel="stylesheet" type="text/css" href="https://www.gstatic.com/charts/51/css/core/tooltip.css">
-
-	<!-- Favicon -->
+	<link id="load-css-0" rel="stylesheet" type="text/css" href="https://www.gstatic.com/charts/51/css/core/tooltip.css">*@
 	<link rel="icon" type="image/x-icon" href="~/Assets/assets/img/favicon/favicon.ico" />
-	<!-- Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-		  rel="stylesheet" />
-	<!-- Icons -->
+	@*<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />*@
+@*	<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+		  rel="stylesheet" />*@
 	<link rel="stylesheet" href="~/Assets/assets/vendor/fonts/boxicons.css" />
 	<link rel="stylesheet" href="~/Assets/assets/vendor/fonts/fontawesome.css" />
 	<link rel="stylesheet" href="~/Assets/assets/vendor/fonts/flag-icons.css" />
-	<!-- Core CSS -->
 	<link rel="stylesheet" href="~/Assets/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
 	<link rel="stylesheet" href="~/Assets/assets/vendor/css/rtl/theme-default.css" class="template-customizer-core-css" />
 	<link rel="stylesheet" href="~/Assets/assets/css/demo.css" />
 	<link rel="stylesheet" href="~/Assets/assets/css/styles.css" />
-	<!-- Vendors CSS -->
 	<link rel="stylesheet" href="~/Assets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 	<link rel="stylesheet" href="~/Assets/assets/vendor/libs/typeahead-js/typeahead.css" />
 	<link rel="stylesheet" href="~/Assets/assets/vendor/libs/apex-charts/apex-charts.css" />
-	<!-- Page CSS -->
-	<!-- Helpers -->
 	<script src="~/Assets/assets/vendor/js/helpers.js"></script>
-	<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-	<!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-	<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 	<script src="~/Assets/assets/js/config.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+@*	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>*@
 	<script src="~/Scripts/jquery-confirm.min.js"></script>
 	<link href="~/Content/css/jquery-confirm.min.css" rel="stylesheet" />
 	<script src="~/Assets/assets/js/jquery.multiselect.js"></script>
@@ -232,7 +194,7 @@
 </head>
 
 <body>
-	<!-- Layout wrapper -->
+
 	<div id="spinner">
 		<img src="~/Content/images/spinner.gif" /> <br /><span>Please Wait...</span>
 	</div>
@@ -250,12 +212,7 @@
 				</div>
 				<div class="menu-inner-shadow"></div>
 				<ul class="menu-inner py-1">
-					<li class="menu-item">
-						<a href="#" class="menu-link">
-							<i class="menu-icon tf-icons bx bx-notepad" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Admin"></i>
-							<div data-i18n="Admin">Admin</div>
-						</a>
-					</li>
+					
 					<li class="menu-item">
 						<a href="#" class="menu-link menu-toggle">
 							<i class="menu-icon tf-icons bx bx-notepad" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Maintenance"></i>
@@ -264,17 +221,23 @@
 						<ul class="menu-sub">
 							<li class="menu-item">
 								<a href="../DataSet/DataSetList" class="menu-link">
-									<div data-i18n="DataSet">DataSet</div>
+									<div data-i18n="DataSet">Dataset Setup</div>
 								</a>
 							</li>
-							<li class="menu-item">
-								<a href="../Filetemplate/Filetemplate" class="menu-link">
-									<div data-i18n="FileTemplate">File Template</div>
-								</a>
-							</li>
+							
 							<li class="menu-item">
 								<a href="../Recon/ReconList" class="menu-link">
-									<div data-i18n="Recon">Recon</div>
+									<div data-i18n="Recon">Recon Setup</div>
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="#" class="menu-link">
+									<div data-i18n="Connector">Connector Setup</div>
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="#" class="menu-link">
+									<div data-i18n="Pipeline">Pipeline Setup</div>
 								</a>
 							</li>
 							<li class="menu-item">
@@ -283,33 +246,51 @@
 								</a>
 							</li>
 							<li class="menu-item">
-								<a href="../Applyrule/Applyrule" class="menu-link">
-									<div data-i18n="ApplyRule">Apply Rule</div>
+								<a href="../Knockoff/PreviewRuleBase" class="menu-link">
+									<div data-i18n="RulePreview">Rule Preview</div>
 								</a>
 							</li>
+					
 						</ul>
 					</li>
+					
+					
 					<li class="menu-item">
 						<a href="#" class="menu-link menu-toggle">
-							<i class="menu-icon tf-icons bx bx-notepad" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Maintenance"></i>
-							<div data-i18n="">Support File Posting</div>
+							<i class="menu-icon tf-icons bx bx-file" data-bs-toggle="tooltip" data-bs-placement="bottom" title=""></i>
+							<div data-i18n="">Process</div>
 						</a>
 						<ul class="menu-sub">
 							<li class="menu-item">
-								<a href="../SupportFile/Rulebased" class="menu-link">
-									<div data-i18n="">Rule based</div>
+								<a href="../Datasetfile/Datasetconversion" class="menu-link">
+									<div data-i18n="">Data Import</div>
 								</a>
 							</li>
 							<li class="menu-item">
-								<a href="../SupportFile/Linebased" class="menu-link">
-									<div data-i18n="">Line Based</div>
+								<a href="../../KnockOff/AutoRuleBase" class="menu-link">
+									<div data-i18n="">Automatic Posting & Knockoff</div>
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="../../KnockOff/ManualKO" class="menu-link">
+									<div data-i18n="">Manual Posting & Knockoff</div>
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="../../KnockOff/UndoKO" class="menu-link">
+									<div data-i18n="">Undo Posting & Knockoff</div>
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="../ExceptionTheming/ExceptionTheming" class="menu-link">
+									<div data-i18n="">Exception Theming</div>
 								</a>
 							</li>
 						</ul>
 					</li>
-					<li class="menu-item">
+					@*<li class="menu-item">
 						<a href="#" class="menu-link menu-toggle">
-							<i class="menu-icon tf-icons bx bx-notepad" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Maintenance"></i>
+							<i class="menu-icon tf-icons bx bx-git-compare" data-bs-toggle="tooltip" data-bs-placement="bottom" title=""></i>
 							<div data-i18n="Knockoff">Knockoff</div>
 						</a>
 						<ul class="menu-sub">
@@ -347,13 +328,13 @@
 					</li>
 					<li class="menu-item">
 						<a href="../ExceptionTheming/ExceptionTheming" class="menu-link">
-							<i class="menu-icon tf-icons bx bx-notepad" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Maintenance"></i>
+							<i class="menu-icon tf-icons bx bx-notepad" data-bs-toggle="tooltip" data-bs-placement="bottom" title=""></i>
 							<div data-i18n="">Exception Theming</div>
 						</a>
-					</li>
+					</li>*@
 					<li class="menu-item">
 						<a href="#" class="menu-link menu-toggle">
-							<i class="menu-icon tf-icons bx bx-notepad" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Maintenance"></i>
+							<i class="menu-icon tf-icons bx bx-analyse" data-bs-toggle="tooltip" data-bs-placement="bottom" title=""></i>
 							<div data-i18n="Utility">Utility</div>
 						</a>
 						<ul class="menu-sub">
@@ -371,7 +352,7 @@
 					</li>
 					<li class="menu-item">
 						<a href="../Reports/WithinAccounts" class="menu-link menu-toggle">
-							<i class="menu-icon tf-icons bx bx-notepad" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Maintenance"></i>
+							<i class="menu-icon tf-icons bx bx-notepad" data-bs-toggle="tooltip" data-bs-placement="bottom" title=""></i>
 							<div data-i18n="Report">Report</div>
 						</a>
 						<ul class="menu-sub">
@@ -423,7 +404,7 @@
 					</div>
 					<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 						<ul class="navbar-nav flex-row align-items-center ms-auto">
-							<li class="nav-item me-2 me-xl-50" style="margin-right: 33rem !important;">
+							<li class="nav-item me-2 me-xl-50" style="margin-right: 33rem;">
 								<h5 class="card-header" id="navhead"></h5>
 							</li>
 							<li class="nav-item dropdown-language dropdown me-2 me-xl-0">
@@ -507,35 +488,23 @@
 					@RenderBody()
 
 				</div>
-
-				<!-- Content wrapper -->
 			</div>
-			<!-- / Layout page -->
 		</div>
-		<!-- Overlay -->
+
 		<div class="layout-overlay layout-menu-toggle"></div>
 
-		<!-- Drag Target Area To SlideIn Menu On Small Screens -->
 		<div class="drag-target"></div>
 	</div>
-	<!-- / Layout wrapper -->
-	<!-- Core JS -->
-	<!-- build:js assets/vendor/js/core.js -->
 	<script src="~/Assets/assets/vendor/libs/popper/popper.js"></script>
 	<script src="~/Assets/assets/vendor/js/bootstrap.js"></script>
 	<script src="~/Assets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 	<script src="~/Assets/assets/vendor/libs/hammer/hammer.js"></script>
 	<script src="~/Assets/assets/vendor/js/menu.js"></script>
-	<!-- endbuild -->
-	<!-- Vendors JS -->
 	<script src="~/Assets/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-	<!-- Main JS -->
 	<script src="~/Assets/assets/js/main.js"></script>
-	<!-- Page JS -->
 	<script src="~/Assets/assets/js/dashboards-analytics.js"></script>
-	<!-- Place this tag in your head or just before your close body tag. -->
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
-
+@*	<script async defer src="https://buttons.github.io/buttons.js"></script>
+*@
 	<script>
 		function openNav() {
 			$(document).ready(function () {
@@ -547,16 +516,12 @@
 
 	<script>
 		var maxorglvl;
-
-		// Show the loader icon
 		$(document).ajaxStart(function () {
 			$('#loader').show();
 			showProgress();
 		});
 
-		// Hide the loader icon
 		$(document).ajaxStop(function () {
-			// $('#loader').hide();
 			hideProgress();
 		});
 

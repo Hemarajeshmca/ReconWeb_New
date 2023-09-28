@@ -1,0 +1,694 @@
+﻿@{
+	Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+<!Doctype html>
+<html>
+<head>
+	<title></title>
+	<style>
+		.nav-item.me-2.me-xl-50 {
+			margin-right: 33rem !important;
+		}
+
+		.error_show {
+			color: red;
+			margin-left: 10px;
+		}
+
+		.k-grid.k-widget {
+			height: 360px;
+		}
+
+		.k-grid-header th.k-header > .k-link {
+			width: 100px;
+		}
+
+		.k-grid-header {
+			font-weight: bold;
+		}
+
+		.k-state-active {
+			display: none;
+		}
+
+		.k-content {
+			font-weight: normal;
+			font-size: 13px;
+		}
+
+		.k-widget.k-window {
+			padding-top: 35px;
+			min-width: 90px;
+			min-height: 50px;
+			width: 700px !important;
+			height: 300px !important;
+			top: 180.766px !important;
+			/*left: 120px !important;*/
+			z-index: 10003;
+			left: 300px !important;
+		}
+
+		.action-button {
+			width: 120px;
+			background: #673AB7;
+			font-weight: bold;
+			color: white;
+			border: 0 none;
+			border-radius: 0px;
+			cursor: pointer;
+			padding: 10px 5px;
+			margin: 10px 0px 10px 5px;
+			float: right;
+			border-radius: 20px;
+		}
+
+		.action-button-previous {
+			width: 100px;
+			background: #616161;
+			font-weight: bold;
+			color: white;
+			border: 0 none;
+			border-radius: 0px;
+			cursor: pointer;
+			padding: 10px 5px;
+			margin: 10px 5px 10px 0px;
+			float: right;
+			border-radius: 20px;
+		}
+	</style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+	<div class="content-wrapper">
+		<div class="container-xxl flex-grow-1 container-p-y">
+			<div class="card-body" style="margin-top:-33px;">
+				<div class="col-7">
+					<label for="" class="form-label" style="font-size: 15px;">&nbsp;Rulename&nbsp;==>&nbsp;HDFC CC BRS &nbsp;</label>
+				</div>
+				<div class="row">
+					<div class="nav-align-top mb-3 mt-3">
+						<ul class="nav nav-pills mb-2" role="tablist">
+							<li class="nav-item">
+								<button type="button" id="rule"
+										class="nav-link active"
+										role="tab"
+										data-bs-toggle="tab"
+										data-bs-target="#navs-pills-FiedConfig"
+										aria-controls="navs-pills-FiedConfig"
+										aria-selected="true">
+									Rule Condition
+								</button>
+							</li>
+							<li class="nav-item">
+								<button type="button" id="base" disabled
+										class="nav-link"
+										role="tab"
+										data-bs-toggle="tab"
+										data-bs-target="#navs-pills-top-base"
+										aria-controls="navs-pills-top-base"
+										aria-selected="true">
+									Dataset Mapping
+								</button>
+							</li>
+							<li class="nav-item">
+								<button type="button" id="identifier"
+										class="nav-link"
+										role="tab"
+										data-bs-toggle="tab"
+										data-bs-target="#navs-pills-top-identifier"
+										aria-controls="navs-pills-top-identifier"
+										aria-selected="true">
+									Identifier
+								</button>
+							</li>
+							<li class="nav-item">
+								<button type="button" id="target-grouping"
+										class="nav-link"
+										role="tab"
+										data-bs-toggle="tab"
+										data-bs-target="#navs-pills-top-target-grouping"
+										aria-controls="navs-pills-top-target-grouping"
+										aria-selected="false">
+									Target Grouping
+								</button>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="navs-pills-FiedConfig" role="tabpanel" style="margin-top:-25px;">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<div class="row" style="padding-bottom:3px;padding-right:30px">
+											<div class="table-responsive text-nowrap">
+												<i data-bs-toggle="modal" data-bs-target="#newdebit" class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green"></i>
+												<table class="table table-bordered table-sm">
+													<thead style="background: #c1c1c1;">
+														<tr class="text-nowrap">
+															<th style="width: 50px;">Action</th>
+															<th>Source Field</th>
+															<th>Extraction criteria</th>
+															<th>Comparison Field</th>
+															<th>Comparison criteria</th>
+															<th>Status</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr style="height:25px;">
+															<td align="center"><i data-bs-toggle="modal" data-bs-target="#newdebit" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red;" aria-hidden="true"></i></td>
+															<td>Tran Date</td>
+															<td>EXACT</td>
+															<td>Tran Date</td>
+															<td>EXACT</td>
+															<td>Active</td>
+														</tr>
+														<tr style="height:25px;">
+															<td align="center"><i data-bs-toggle="modal" data-bs-target="#newdebit" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red;" aria-hidden="true"></i></td>
+															<td>Branch Code</td>
+															<td>EXACT</td>
+															<td>Branch Code</td>
+															<td>EXACT</td>
+															<td>Active</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="modal" id="newdebit" tabindex="-1" aria-hidden="true">
+										<div class="modal-dialog modal-lg" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+												</div>
+												<div class="modal-body" style="margin-top: -26px;">
+													<div class="row">
+														<div class="col-sm-4">
+														</div>
+														<div class="col-sm-4">
+															<h4 style="font-size: 15px;text-align: center;color: #1a9950;font-weight: 600;">New</h4>
+														</div>
+														<div class="col-sm-4">
+															<i class="bx bx-x cursor-pointer" data-bs-dismiss="modal" style="color: #000000;float:right"></i>
+														</div>
+													</div>
+													<hr style="margin-top:-1px; width:100%;">
+													<div class="container">
+														<div class="row" style="padding-bottom:5px;margin-top:5px;padding-left:30px;padding-right:5px">
+															<div class="col-sm-6">
+																<label for="" class="form-label">Base Field</label>
+																<select id="mode" class="form-select form-control">
+																	<option value="1" selected>Branch Code</option>
+																	<option value="2">Tran Date</option>
+																</select>
+															</div>
+															<div class="col-sm-6">
+																<label for="" class="form-label">Target Field</label>
+																<select id="mode" class="form-select form-control">
+																	<option value="1" selected>Branch Code</option>
+																	<option value="2">Tran Date</option>
+																</select>
+															</div>
+														</div>
+
+														<div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:30px;padding-right:5px">
+															<div class="col-sm-6">
+																<label for="" class="form-label">Extraction Criteria </label>
+																<select id="mode" class="form-select form-control">
+																	<option value="1" selected>EXACT</option>
+																	<option value="2"></option>
+																</select>
+																@*<textarea class="form-control" id="extraction" name="extraction" type="text" value="" data-bind="value:Extraction Criteria" rows="4" cols="20"></textarea>*@
+															</div>
+															<div class="col-sm-6">
+																<label for="" class="form-label">Comparision Criteria  </label>
+																<select id="mode" class="form-select form-control">
+																	<option value="1" selected>EXACT</option>
+																	<option value="2"></option>
+																</select>
+																@*<textarea class="form-control" id="Comparision" name="Comparision" type="text" value="" data-bind="value:Comparision Criteria" rows="4" cols="20"></textarea>*@
+															</div>
+														</div>
+														<div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:30px;padding-right:5px">
+															<div class="col-sm-6">
+															</div>
+															<div class="col-sm-6">
+																<label for="" class="form-label"></label>
+																<center>
+																	<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
+																	<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr1()">Cancel</button>
+																</center>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4"></div>
+										<div class="col-sm-4"></div>
+										<div class="col-sm-4">
+											<input type="button" name="next" class="next action-button" value="Next" onclick="validateNextrule();" />
+											<input type="button" name="previous" class="previous action-button-previous" value="Previous" onclick="window.location.href = '/Rulesetup/Rulesetupdetail'" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="navs-pills-top-base" role="tabpanel" style="margin-top:-25px;">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<i data-bs-toggle="modal" data-bs-target="#newbase" class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green"></i>
+										@*<i class="fa fa-plus" aria-hidden="true" onclick="rrbase()" style="color:green; cursor: pointer;padding-bottom: 23px;padding-left: 1px;"></i>*@
+										<div class="row" style="padding-bottom:5px;margin-top:5px;padding-right:10px">
+											<div class="table-responsive text-nowrap">
+												<table class="table table-bordered table-sm">
+													<thead style="background: #c1c1c1;">
+														<tr class="text-nowrap">
+															<th style="width: 50px;">Action</th>
+															<th>Dr/Cr</th>
+															<th>Source Dataset</th>
+															<th>Comparison Dataset</th>
+															<th>Order</th>
+															<th>Status</th>
+
+														</tr>
+													</thead>
+													<tbody>
+														<tr style="height:25px;">
+															<td align="center"><i data-bs-toggle="modal" onclick="rr()" data-bs-target="#base_identifier" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red;" aria-hidden="true"></i></td>
+															<td>Credit</td>
+															<td>HDFC Bank - 123456</td>
+															<td>HDFC Ledger - 00234123</td>
+															<td>1</td>
+															<td>Active</td>
+														</tr>
+														<tr style="height:25px;">
+															<td align="center"><i data-bs-toggle="modal" onclick="rr()" data-bs-target="#base_identifier" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red;" aria-hidden="true"></i></td>
+															<td>Debit</td>
+															<td>HDFC Ledger - 00234123</td>
+															<td>HDFC Bank - 123456</td>
+															<td>2</td>
+															<td>Active</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="modal" id="newbase" tabindex="-1" aria-hidden="true">
+												<div class="modal-dialog modal-lg" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+														</div>
+														<div class="modal-body" style="margin-top: -26px;">
+															<div class="row">
+																<div class="col-sm-4">
+																</div>
+																<div class="col-sm-4">
+																	<h4 style="font-size: 15px;text-align: center;color: #1a9950;font-weight: 600;">New</h4>
+																</div>
+																<div class="col-sm-4">
+																	<i class="bx bx-x cursor-pointer" data-bs-dismiss="modal" style="color: #000000;float:right"></i>
+																</div>
+															</div>
+															<hr style="margin-top:-1px; width:100%;">
+															<div class="container">
+																<div class="row" style="padding-bottom:5px;margin-top:5px;padding-right:10px">
+																	<div class="col-sm-4">
+																		<label for="" class="form-label">
+																			Source Dataset
+																		</label>
+																		<select id="mode" class="form-select form-control">
+																			<option value="1" selected>409000472606-Hdfc CC- Bank </option>
+																			<option value="2">Account2</option>
+																			<option value="3">Account3</option>
+																		</select>
+																	</div>
+																	<div class="col-sm-4">
+																		<label for="" class="form-label">
+																			Comparison Dataset
+																		</label>
+																		<select id="mode" class="form-select form-control">
+																			<option value="1" selected>409000472606-Hdfc CC- Bank </option>
+																			<option value="2">Account2</option>
+																			<option value="3">Account3</option>
+																		</select>
+																	</div>
+																	<div class="col-sm-4">
+																		<label for="" class="form-label">Order</label>
+																		<input class="form-control" id="order" name="order" type="text" value="2" data-bind="value:order">
+																	</div>
+
+																</div>
+																<div class="row" style="padding-bottom:5px;margin-top:5px;padding-right:10px">
+																	<div class="col-sm-4">
+																		<label for="" class="form-label">Account Mode</label>
+																		<select id="mode" class="form-select form-control">
+																			<option value="1" selected>Credit</option>
+																			<option value="2">Saving</option>
+																			<option value="2">N/A</option>
+																		</select>
+																	</div>
+																	<div class="col-sm-4">
+																	</div>
+																	<div class="col-sm-4" style="margin-top: 3%;text-align: right;">
+																		<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
+																		<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rrbase1()">Cancel</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-4"></div>
+												<div class="col-sm-4"></div>
+												<div class="col-sm-4">
+													<input type="button" name="next" class="next action-button" value="Next" onclick="validateNextbase();" />
+													<input type="button" name="previous" class="previous action-button-previous" value="Previous" onclick="validatepreviousbase()" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="navs-pills-top-identifier" role="tabpanel" style="margin-top:-10px;">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<div class="row" style="padding-bottom:5px;margin-top:5px;padding-right:10px">
+											<div class="table-responsive text-nowrap" style="margin-top: -20px;">
+												<i data-bs-toggle="modal" data-bs-target="#newidentifier" class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green"></i>
+												@*<i class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green; cursor: pointer" onclick="rr2()"></i>*@
+												<table class="table table-bordered table-sm">
+													<thead style="background: #c1c1c1;">
+														<tr class="text-nowrap">
+															<th style="width: 50px;">Action</th>
+															<th>Filter Applied On</th>
+															<th>Filter Field</th>
+															<th>Filter Criteria</th>
+															<th>Identifier Criteria</th>
+															<th>Identifier Value</th>
+															<th>Status</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr style="height:25px;">
+															<td align="center"><i data-bs-toggle="modal" data-bs-target="#viewdebit" onclick="rr2()" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff; cursor:pointer"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red; cursor:pointer" aria-hidden="true"></i></td>
+															<td>Base-HDFC Bank - 123456</td>
+															<td>Narration	</td>
+															<td>EXACT	</td>
+															<td>BEGINS WITH	</td>
+															<td>CASH DEP	</td>
+															<td>Active</td>
+														</tr>
+													</tbody>
+													<tbody>
+														<tr style="height:25px;">
+															<td align="center"><i data-bs-toggle="modal" data-bs-target="#viewdebit" onclick="rr2()" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff; cursor:pointer"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red; cursor:pointer" aria-hidden="true"></i></td>
+															<td>Target-HDFC Ledger - 00234123</td>
+															<td>Cheque No	</td>
+															<td>EXACT	</td>
+															<td>CONTAINS	</td>
+															<td>ERP	</td>
+															<td>Active</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal" id="newidentifier" tabindex="-1" aria-hidden="true">
+									<div class="modal-dialog modal-lg" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+											</div>
+											<div class="modal-body" style="margin-top: -26px;">
+												<div class="row">
+													<div class="col-sm-4">
+													</div>
+													<div class="col-sm-4">
+														<h4 style="font-size: 15px;text-align: center;color: #1a9950;font-weight: 600;">New</h4>
+													</div>
+													<div class="col-sm-4">
+														<i class="bx bx-x cursor-pointer" data-bs-dismiss="modal" style="color: #000000;float:right"></i>
+													</div>
+												</div>
+												<hr style="margin-top:-1px; width:100%;">
+												<div class="container">
+													<div class="row" style="padding-bottom:5px;margin-top:5px">
+														<div class="col-sm-4">
+															<label for="" class="form-label">
+																Filter Apply On
+															</label>
+															<select id="mode" class="form-select form-control">
+																<option value="1" selected>Field1</option>
+																<option value="2">Field2</option>
+																<option value="3">Field3</option>
+															</select>
+														</div>
+
+														<div class="col-sm-4">
+															<label for="" class="form-label">
+																Filter Name
+															</label>
+															<select id="mode" class="form-select form-control">
+																<option value="1" selected>Name1</option>
+																<option value="2">Name2</option>
+																<option value="3">Name3</option>
+															</select>
+														</div>
+														<div class="col-sm-4">
+															<label for="" class="form-label">External Criteria</label>
+															<input class="form-control" id="order" name="order" type="text" value="" data-bind="value:order">
+														</div>
+													</div>
+													<div class="row" style="padding-bottom:5px;margin-top:5px;">
+
+														<div class="col-sm-4">
+															<label for="" class="form-label">
+																Extraction Filter
+															</label>
+															<input class="form-control" id="order" name="order" type="text" value="" data-bind="value:order">
+														</div>
+														<div class="col-sm-4">
+															<label for="" class="form-label">Identifier Criteria</label>
+															<input class="form-control" id="order" name="order" type="text" value="" data-bind="value:order">
+														</div>
+														<div class="col-sm-4">
+															<label for="" class="form-label">Identifier value</label>
+															<input class="form-control" id="order" name="order" type="text" value="" data-bind="value:order">
+														</div>
+													</div>
+													<div class="row" style="padding-bottom:5px;margin-top:5px;">
+														<div class="col-sm-4">
+														</div>
+														<div class="col-sm-4">
+														</div>
+														<div class="col-sm-4" style="margin-top:3%;">
+															<button type="submit" class="btn btn-sm btn-success me-2" style="background: green ;border-color: Green;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
+															<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr3()">Cancel</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-4"></div>
+									<div class="col-sm-4"></div>
+									<div class="col-sm-4">
+										<input type="button" name="next" class="next action-button" value="Next" onclick="validateNextidentifier();" />
+										<input type="button" name="previous" class="previous action-button-previous" value="Previous" onclick="validatepreviousidentifier()" />
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="navs-pills-top-target-grouping" role="tabpanel" style="margin-top:-25px;">
+								<div class="panel panel-default">
+									<div class="panel-body" style="padding: 10px 0px;">
+										<i data-bs-toggle="modal" data-bs-target="#newtargetgrouping" class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green"></i>
+										@*<i class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green; cursor: pointer" onclick="rr5()"></i>*@
+										<table class="table table-bordered table-sm">
+											<thead style="background: #c1c1c1;">
+												<tr class="text-nowrap">
+													<th style="width: 50px;">Action</th>
+													<th>Sl No</th>
+													<th>Comparison Group Field</th>
+													<th>Status</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr style="height:25px;">
+													<td align="center"><i data-bs-toggle="modal" data-bs-target="#viewdebit" onclick="rr5()" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff; cursor:pointer"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red; cursor:pointer" aria-hidden="true"></i></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+												<tr style="height:25px;">
+													<td align="center"><i data-bs-toggle="modal" data-bs-target="#viewdebit" onclick="rr5()" class="fa fa-pencil cursor-pointer" aria-hidden="true" style="font-size: 12px;color: #5490ff; cursor:pointer"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="font-size: 12px;color: red; cursor:pointer" aria-hidden="true"></i></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="modal" id="newtargetgrouping" tabindex="-1" aria-hidden="true">
+										<div class="modal-dialog modal-lg" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+												</div>
+												<div class="modal-body" style="margin-top: -26px;">
+													<div class="row">
+														<div class="col-sm-4">
+														</div>
+														<div class="col-sm-4">
+															<h4 style="font-size: 15px;text-align: center;color: #1a9950;font-weight: 600;">New</h4>
+														</div>
+														<div class="col-sm-4">
+															<i class="bx bx-x cursor-pointer" data-bs-dismiss="modal" style="color: #000000;float:right"></i>
+														</div>
+													</div>
+													<hr style="margin-top:-1px; width:100%;">
+													<div class="container">
+														<div class="row" style="padding-bottom:5px;margin-top:5px;padding-left:10px;padding-right:10px">
+															<div class="col-sm-4">
+																<label for="" class="form-label">Comparison Group Field Name</label>
+																<select id="mode" class="form-select form-control">
+																	<option value="1" selected>AC No</option>
+																	<option value="2">Amount</option>
+																	<option value="3">Application Name</option>
+																</select>
+															</div>
+															<div class="col-sm-4">
+															</div>
+															<div class="col-sm-4" style="margin-top: 3%;">
+																<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
+																<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr6()">Cancel</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4"></div>
+										<div class="col-sm-4"></div>
+										<div class="col-sm-4">
+											<input type="button" name="next" class="next action-button" value="Finish" onclick="window.location.href = '/Rulesetup/Rulesetupdetail'" />
+											<input type="button" name="previous" class="previous action-button-previous" value="Previous" onclick="validateprevioustargetgrouping()" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#navhead").text("Rule Setup");
+		kendodate_format();
+	});
+	function rr() {
+		$("#newdebit").show();
+	}
+	function rr1() {
+		$("#newdebit").hide();
+	}
+	function rrbase() {
+		$("#collapseOne").show();
+	}
+	function rrbase1() {
+		$("#collapseOne").hide();
+	}
+	function validateNextrule() {
+		$("#rule").removeClass('nav-link active');
+		$("#rule").toggleClass('nav-link');
+		$("#navs-pills-top-base").toggleClass('tab-pane fade active in');
+		$("#navs-pills-FiedConfig").toggleClass('tab-pane fade');
+		$("#base").removeClass('nav-link');
+		$("#base").toggleClass('nav-link active');
+		$("#navs-pills-FiedConfig").hide();
+		$("#navs-pills-top-base").show();
+	}
+
+	function validateNextbase() {
+		$("#base").removeClass('nav-link active');
+		$("#base").toggleClass('nav-link');
+		$("#navs-pills-top-identifier").toggleClass('tab-pane fade active in');
+		$("#navs-pills-top-base").toggleClass('tab-pane fade');
+		$("#navs-pills-FiedConfig").toggleClass('tab-pane fade');
+		$("#identifier").removeClass('nav-link');
+		$("#identifier").toggleClass('nav-link active');
+		$("#navs-pills-top-base").hide();
+		$("#navs-pills-FiedConfig").hide();
+		$("#navs-pills-top-identifier").show();
+	}
+	function validatepreviousbase() {
+		$("#base").removeClass('nav-link active');
+		$("#base").toggleClass('nav-link');
+		$("#navs-pills-FiedConfig").toggleClass('tab-pane fade active in');
+		$("#navs-pills-top-base").toggleClass('tab-pane fade');
+		$("#rule").removeClass('nav-link');
+		$("#rule").toggleClass('nav-link active');
+		$("#navs-pills-top-base").hide();
+		$("#navs-pills-FiedConfig").show();
+	}
+	function validateNextidentifier() {
+		$("#target-grouping").removeClass('nav-link');
+		$("#target-grouping").toggleClass('nav-link active');
+		$("#navs-pills-top-target-grouping").toggleClass('tab-pane fade active in');
+		$("#navs-pills-top-identifier").toggleClass('tab-pane fade');
+		$("#navs-pills-top-base").toggleClass('tab-pane fade');
+		$("#navs-pills-FiedConfig").toggleClass('tab-pane fade');
+		$("#identifier").removeClass('nav-link active');
+		$("#identifier").toggleClass('nav-link');
+		$("#navs-pills-top-target-grouping").show();
+		$("#navs-pills-top-base").hide();
+		$("#navs-pills-FiedConfig").hide();
+		$("#navs-pills-top-identifier").hide();
+
+	}
+	function validatepreviousidentifier() {
+		$("#base").removeClass('nav-link');
+		$("#base").toggleClass('nav-link active');
+		$("#navs-pills-top-base").toggleClass('tab-pane fade active in');
+		$("#navs-pills-FiedConfig").toggleClass('tab-pane fade');
+		$("#navs-pills-top-identifier").toggleClass('tab-pane fade');
+		$("#identifier").removeClass('nav-link active');
+		$("#identifier").toggleClass('nav-link');
+		$("#navs-pills-top-base").show();
+		$("#navs-pills-FiedConfig").hide();
+		$("#navs-pills-top-identifier").hide();
+	}
+	function validateprevioustargetgrouping() {
+		$("#target-grouping").removeClass('nav-link active');
+		$("#target-grouping").toggleClass('nav-link');
+		$("#navs-pills-top-identifier").toggleClass('tab-pane fade active in');
+		$("#navs-pills-top-target-grouping").toggleClass('tab-pane fade');
+		$("#navs-pills-top-base").toggleClass('tab-pane fade');
+		$("#navs-pills-FiedConfig").toggleClass('tab-pane fade');
+		$("#identifier").removeClass('nav-link');
+		$("#identifier").toggleClass('nav-link active');
+		$("#navs-pills-top-base").hide();
+		$("#navs-pills-FiedConfig").hide();
+		$("#navs-pills-top-identifier").show();
+		$("#navs-pills-top-target-grouping").hide();
+	}
+	function rr2() {
+		$("#collapsetwo").show();
+	}
+	function rr3() {
+		$("#collapsetwo").hide();
+	}
+	function rr5() {
+		$("#collapsethree").show();
+	}
+	function rr6() {
+		$("#collapsethree").hide();
+	}
+</script>
+

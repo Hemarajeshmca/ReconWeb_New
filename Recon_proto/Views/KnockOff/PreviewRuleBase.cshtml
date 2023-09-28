@@ -1,5 +1,4 @@
 ﻿@{
-	ViewData["Title"] = "Filetemplate";
 	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 
@@ -8,6 +7,9 @@
 <head>
 	<title></title>
 	<style>
+		.nav-item.me-2.me-xl-50 {
+			margin-right: 28rem !important;
+		}
 		.error_show {
 			color: red;
 			margin-left: 10px;
@@ -93,21 +95,24 @@
 					<table class="table table-bordered table-sm">
 						<thead style="background: #c1c1c1;">
 							<tr class="text-nowrap">
-								<th>Select</th>
+								<th style="width: 50px;">Select</th>
 								<th>Rule</th>
-								
+								<th>Source Dataset</th>
+								<th>Comparison Dataset</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr style="height:25px;">
 								<td><input type="checkbox" id="select" style="margin-left: 10px;" name="" value="P"></td>
-								<td>1-CUB CC- UPI Collection From Customer & Non Loan Credit	</td>
-								
+								<td>Hdfc CC- UPI Collection From Customer	</td>
+								<td>HDFC Bank - 123456</td>
+								<td>HDFC Ledger - 00234123</td>
 							</tr>
 							<tr style="height:25px;">
 								<td><input type="checkbox" id="select" style="margin-left: 10px;" name="" value="P"></td>
-								<td>2-CUB CC- Cheque Collection From Customer	</td>
-								
+								<td>Hdfc CC- IMPS Collection From Customer	</td>
+								<td>HDFC Ledger - 00234123231</td>
+								<td>HDFC Bank - 123456132</td>
 							</tr>
 						</tbody>
 					</table>
@@ -122,7 +127,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-		$("#navhead").text("Rule Based KO-Preview");
+		$("#navhead").text("Rule Preview");
 		kendodate_format();
 	});
 

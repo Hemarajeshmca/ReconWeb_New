@@ -12,5 +12,9 @@ namespace Recon_proto.Controllers
 		{
 			return View();
 		}
+		public IActionResult Rulesetupcondition()
+		{
+			return View();
+		}
 	}
 }
