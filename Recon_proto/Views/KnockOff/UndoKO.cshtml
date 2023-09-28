@@ -1,5 +1,4 @@
 ﻿@{
-	ViewData["Title"] = "Filetemplate";
 	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 
@@ -7,7 +6,11 @@
 <html>
 <head>
 	<title></title>
-
+	<style>
+		.nav-item.me-2.me-xl-50 {
+			margin-right: 33rem !important;
+		}
+	</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
 	<div class="content-wrapper">
@@ -47,12 +50,12 @@
 					<table class="table table-bordered table-sm">
 						<thead style="background: #c1c1c1;">
 							<tr class="text-nowrap">
-								<th>Action</th>
+								<th style="width: 50px;">Action</th>
 								<th>KO Id</th>
 								<th>KO date</th>
 								<th>Recon Name</th>
 								<th>Rule Name</th>
-								<th>Mapping Type</th>
+								<th>KnockOff Type</th>
 								<th>KnockOff By</th>
 								<th>KnockOff Amount</th>
 							</tr>
@@ -89,7 +92,7 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function () {
-		$("#navhead").text("Undo KO");
+		$("#navhead").text("Undo Posting & Knockoff");
 		kendodate_format();
 	});
 </script>

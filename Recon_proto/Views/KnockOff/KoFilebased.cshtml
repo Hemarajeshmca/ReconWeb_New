@@ -1,5 +1,4 @@
 ﻿@{
-	ViewData["Title"] = "Filetemplate";
 	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 
@@ -7,7 +6,11 @@
 <html>
 <head>
 	<title></title>
-
+	<style>
+		.nav-item.me-2.me-xl-50 {
+			margin-right: 28rem !important;
+		}
+	</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
 	<div class="content-wrapper">
@@ -18,12 +21,12 @@
 					<table class="table table-bordered table-sm">
 						<thead style="background: #c1c1c1;">
 							<tr class="text-nowrap">
-								<th>Action</th>
+								<th style="width: 50px;">Action</th>
 								<th>File Name</th>
 								<th>Recon Name</th>
 								<th>Total Records</th>
-								<th>Debit Total</th>
-								<th>Credit Total</th>
+								<th>Base Total</th>
+								<th>Target Total</th>
 								<th>Difference</th>
 								
 							</tr>

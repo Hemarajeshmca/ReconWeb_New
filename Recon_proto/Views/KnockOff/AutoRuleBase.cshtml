@@ -1,5 +1,4 @@
-﻿@{
-	ViewData["Title"] = "Filetemplate";
+﻿@{	
 	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 
@@ -8,6 +7,9 @@
 <head>
 	<title></title>
 	<style>
+		.nav-item.me-2.me-xl-50 {
+			margin-right: 28rem !important;
+		}
 		.error_show {
 			color: red;
 			margin-left: 10px;
@@ -45,21 +47,51 @@
 			z-index: 10003;
 			left: 300px !important;
 		}
+
+		.tooltip-container {
+			position: relative;
+			display: inline-block;
+		}
+
+		.info-icon {
+			cursor: pointer;
+		}
+
+		.tooltip1 {
+			display: none;
+			position: absolute;
+			background-color: lightslategray;
+			color: #fff;
+			padding: 10px;
+			border-radius: 15px;
+			white-space: nowrap;
+			z-index: 1;
+			top: 100%;
+			margin-left: -142px;
+			transform: translateX(-50%);
+		}
+
+		.tooltip-container:hover .tooltip1 {
+			display: block;
+		}
 	</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
 	<div class="content-wrapper">
 		<div class="container-xxl flex-grow-1 container-p-y">
-			<div class="card-body" style="margin-top:-1%;">
+			<div class="card-body" style="margin-top:-1%;height: 84%;">
 				<div class="row" style="margin-top:10px;margin-bottom: 2%;">
-					<div class="col-md-3">
+					@*<div class="col-md-3">
 						<label class="form-label">Recon Type</label>
-						<select id="type" class="form-select form-control">
-							<option value="all" selected>Within Account</option>
-							<option value="">Between Account</option>
-							
+						<select id="mode" class="form-select form-control">
+							<option value="I">Proof</option>
+							<option value="I" selected>Brs</option>
+							<option value="I">Contra</option>
+							<option value="I">Mirror</option>
+							<option value="I">Value Based</option>
+							<option value="I">Non Value Based</option>
 						</select>
-					</div>
+					</div>*@
 					<div class="col-md-3">
 						<label for="" class="form-label">Date From</label>
 						<div>
@@ -88,29 +120,100 @@
 					<table class="table table-bordered table-sm">
 						<thead style="background: #c1c1c1;">
 							<tr class="text-nowrap">
-								<th>Select</th>
-								<th>Recon Name</th>
-								<th>Account No.1</th>
-								<th>Account No.2</th>
+								<th style ="width: 50px;">Select</th>
+								<th>Recon Name</th>	
+								<th>Recon Type</th>
+								<th>Last KO Execution Date</th>
+								<th>Last KO Execution Status</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr style="height:25px;">
 								<td><input type="checkbox" id="select" style="margin-left: 10px;" name="" value="P"></td>
-								<td>KVB CC BRS - 1219221000000189</td>
-								<td>1219221000000189-KVB CC- Bank</td>
-								<td>12150505-KVB CC- Oracle Ledger</td>
+								<td>Hdfc CC- UPI Collection From Customer</td>
+								<td>Brs</td>
+								<td>19-09-2023</td>
+								<td>Inprocess</td>
+								<td>
+									<div class="tooltip-container">
+										<i data-bs-toggle="modal" data-bs-target="#infomodal" class="fa fa-info cursor-pointer" aria-hidden="true" style="color:green"></i>
+										@*<span class="info-icon">ℹ️</span>
+										<div class="tooltip1">
+											<p><strong>Job Description&nbsp;&nbsp;:&nbsp;</strong>HDFC Bank Presentation 123456</p>
+											<p><strong>Job Initiated Date-Time&nbsp;&nbsp;:&nbsp;</strong>19-09-2023 12:00:00 PM</p>
+											<p><strong>Job Completed Date-Time&nbsp;&nbsp;:&nbsp;</strong></p>
+											<p><strong>Job Initiated By&nbsp;&nbsp;:&nbsp;</strong>Ko</p>
+											<p><strong>Job Status&nbsp;&nbsp;:&nbsp;</strong>Inprocess</p>
+											<p><strong>Job Remark&nbsp;&nbsp;:&nbsp;</strong>process records 1000</p>
+										</div>*@
+									</div>
+								</td>
 							</tr>
 							<tr style="height:25px;">
 								<td><input type="checkbox" id="select" style="margin-left: 10px;" name="" value="P"></td>
-								<td>CUB CC BRS - 113120000100488</td>
-								<td>113120000100488-CUB CC- Bank</td>
-								<td>12150101-CUB CC- Oracle Ledger</td>
+								<td>Hdfc CC- IMPS Collection From Customer</td>
+								<td>Brs</td>
+								<td>19-09-2023</td>
+								<td>Inprocess</td>
+								<td>
+									<div class="tooltip-container">
+										<i data-bs-toggle="modal" data-bs-target="#infomodal" class="fa fa-info cursor-pointer" aria-hidden="true" style="color:green"></i>
+										@*<span class="info-icon">ℹ️</span>
+										<div class="tooltip1">
+											<p><strong>Job Description&nbsp;&nbsp;:&nbsp;</strong>HDFC Bank Presentation 123456</p>
+											<p><strong>Job Initiated Date-Time&nbsp;&nbsp;:&nbsp;</strong>19-09-2023 12:00:00 PM</p>
+											<p><strong>Job Completed Date-Time&nbsp;&nbsp;:&nbsp;</strong></p>
+											<p><strong>Job Initiated By&nbsp;&nbsp;:&nbsp;</strong>KO</p>
+											<p><strong>Job Status&nbsp;&nbsp;:&nbsp;</strong>Inprocess</p>
+											<p><strong>Job Remark&nbsp;&nbsp;:&nbsp;</strong>process records 100</p>
+										</div>*@
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+			</div>
+		</div>
+	</div>
 
+	<div class="modal fade" id="infomodal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				</div>
+				<div class="modal-body" style="margin-top: -26px;">
+					<div class="row">
+						<div class="col-sm-4">
+						</div>
+						<div class="col-sm-4">
+							<h4 style="font-size: 15px;text-align: center;color: #1a9950;font-weight: 600;">Info</h4>
+						</div>
+						<div class="col-sm-4">
+							<i class="bx bx-x cursor-pointer" data-bs-dismiss="modal" style="color: #000000;float:right"></i>
+						</div>
+					</div>
+					<hr style="margin-top:-1px; width:100%;">
+					<div class="container">
+
+						<p><strong>Job Description&nbsp;&nbsp;:&nbsp;</strong>HDFC Ledger - 00234123</p>
+						<p><strong>Job Initiated Date-Time&nbsp;&nbsp;:&nbsp;</strong>11-09-2023 12:00:00 PM</p>
+						<p><strong>Job Completed Date-Time&nbsp;&nbsp;:&nbsp;</strong>11-09-2023 02:24:45 PM</p>
+						<p><strong>Job Initiated By&nbsp;&nbsp;:&nbsp;</strong>Excel</p>
+						<p><strong>Job Status&nbsp;&nbsp;:&nbsp;</strong> Completed</p>
+						<p><strong>Job Remark&nbsp;&nbsp;:&nbsp;</strong>Completed records 1000</p>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"> </div>
+
+					<div class="col-sm-4" style="margin-bottom:30px;float: right;">
+						<center><button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr1()">Cancel</button></center>
+					</div>
+					<div class="col-sm-4"> </div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -120,8 +223,12 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-		$("#navhead").text("Rule Based KO-Automatic");
+		$("#navhead").text("Automatic Posting & Knockoff");
 		kendodate_format();
 	});
 
+
+	function rr1() {
+		$("#infomodal").hide();
+	}
 </script>

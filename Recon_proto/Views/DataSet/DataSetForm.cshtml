@@ -6,6 +6,9 @@
 <head>
     <title></title>
     <style>
+        .nav-item.me-2.me-xl-50 {
+            margin-right: 33rem !important;
+        }
         .error_show {
             color: red;
             margin-left: 10px;
@@ -48,7 +51,7 @@
 <body class="hold-transition skin-blue sidebar-mini fixed">
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="card-body" style="margin-top:-33px;">             
+            <div class="card-body" style="margin-top:-12px;height: 84%;">
                 <form method="post" class="form-horizontal" id="form" enctype="multipart/form-data">
                     <div class="row" style="margin-top: -18px;margin-bottom: 10px;">
                         <div class="col-sm-6">
@@ -106,21 +109,10 @@
                         </div>
                       
                     </div>
-                    <div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:10px;padding-right:10px">
-                        <div class="col-sm-4">
-                           
-                        </div>
-                        <div class="col-sm-4" style="margin-top:2%;">
-                            <button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
-                            <button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr7()">Cancel</button>
-                        </div>
-                        <div class="col-sm-4">
-                           
-                        </div>                       
-                    </div>
+                   
                    
                     <div class="row" style="margin-top:10px;">
-                        <div class="table-responsive text-nowrap" style="margin-top: -20px;">                           
+                        <div class="table-responsive text-nowrap">                           
                             <i data-bs-toggle="modal" data-bs-target="#newdebit" class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green"></i>
                             <table class="table table-bordered table-sm">
                                 <thead style="background: #c1c1c1;">
@@ -157,6 +149,18 @@
                             </table>
                         </div>
                     </div>
+
+                    <div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:10px;padding-right:10px">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4" style="margin-top:2%;">
+                            <button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
+                            <a href="../DataSet/DataSetList" class="btn btn-sm btn-success me-2" style="background: red;border-color: red;width:40%;cursor:pointer;">Cancel</a>
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                    </div>
+                    
                     <div class="modal fade" id="newdebit" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -202,13 +206,13 @@
                                                     <input type="radio" id="mandatory" style="margin-left: 10px;" name="mandatory" checked value="N">&nbsp;&nbsp;No&nbsp;
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4">
+                                           @* <div class="col-sm-4">
                                                 <label for="" class="form-label">Status&nbsp;</label>
                                                 <div style="margin-left:2px;margin-top:5px">
                                                     <input type="radio" id="Status" name="Status" value="Y" checked>&nbsp;&nbsp;Active&nbsp;
                                                     <input type="radio" id="Status" style="margin-left: 10px;" name="Status" value="N">&nbsp;&nbsp;InActive&nbsp;
                                                 </div>
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
                                     <div class="col-sm-4" style="margin-top:30px;float: right;">
@@ -232,7 +236,11 @@
         $("#newdebit").show();
     }
     function rr1() {
-        window.location.href = "../DataSet/DataSetForm"
+        window.location.href = "../DataSet/DataSetForm";
+    }
+    function rr7(){
+        debugger;
+       window.location.href = "../DataSet/DataSetList";
     }
 </script>
 

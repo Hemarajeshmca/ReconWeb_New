@@ -1,5 +1,4 @@
 ﻿@{
-	ViewData["Title"] = "Filetemplate";
 	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 
@@ -8,6 +7,9 @@
 <head>
 	<title></title>
 	<style>
+		.nav-item.me-2.me-xl-50 {
+			margin-right: 28rem !important;
+		}
 		.accordion {
 			background-color: #eee;
 			color: #444;
@@ -80,8 +82,8 @@
 					<table class="table table-bordered table-sm" style="margin-top: 1%;">
 						<thead style="background: #c1c1c1;">
 							<tr class="text-nowrap">
-								<th>Select</th>
-								<th>Action</th>
+								<th style="width: 50px;">Select</th>
+								<th style="width: 50px;">Action</th>
 								<th>Dataset Name</th>
 								<th>Dataset Type</th>
 								<th>Date</th>
@@ -100,10 +102,10 @@
 
 								</td>
 								<td>HDFC Bank - 123456</td>
-								<td>Base/Dr	</td>
+								<td>Base	</td>
 								<td>01-09-2023</td>
-								<td>5000.00</td>
-								<td>5000.00</td>
+								<td>Dr 5000.00</td>
+								<td>Dr 5000.00</td>
 								
 							</tr>
 							<tr style="height:25px;">
@@ -113,10 +115,10 @@
 
 								</td>
 								<td>HDFC Ledger - 00234123</td>
-								<td>Target/Cr</td>
+								<td>Target</td>
 								<td>01-09-2023</td>
-								<td>5000.00	</td>
-								<td>5000.00</td>
+								<td>Cr 5000.00	</td>
+								<td>Cr 5000.00</td>
 								
 							</tr>
 						</tbody>
@@ -128,8 +130,8 @@
 					<table class="table table-bordered table-sm" style="margin-top: 1%;">
 						<thead style="background: #c1c1c1;">
 							<tr class="text-nowrap">
-								<th>Select</th>
-								<th>Action</th>
+								<th style="width: 50px;">Select</th>
+								<th style="width: 50px;">Action</th>
 								<th>Dataset Name</th>
 								<th>Dataset Type</th>
 								<th>Date</th>
@@ -145,10 +147,10 @@
 								</td>
 								
 								<td>HDFC Bank - 123456</td>
-								<td>Base/Dr</td>
+								<td>Base</td>
 								<td>01-09-2023</td>
-								<td>5000.00</td>
-								<td>5000.00</td>
+								<td>Dr 5000.00</td>
+								<td>Dr 5000.00</td>
 								
 							</tr>
 							<tr style="height:25px;">
@@ -162,10 +164,10 @@
 								</td>
 								
 								<td>HDFC Ledger - 00234123</td>
-								<td>Target/Cr	</td>
+								<td>Target</td>
 								<td>01-09-2023</td>
-								<td>5000.00</td>
-								<td>5000.00</td>
+								<td>Cr 5000.00</td>
+								<td>Cr 5000.00</td>
 							</tr>
 						</tbody>
 					</table>
@@ -173,28 +175,28 @@
 
 				<div class="row" style="margin-top: 1%;">
 					<div class="col-md-2">
-						Total Debit Exception
+						Total Base Exception
 					</div>
 					<div class="col-md-1">
-						0
+						0.00
 					</div>
 					<div class="col-md-2">
-						Total Credit Exception
+						Total Target Exception
 					</div>
 					<div class="col-md-1">
-						0
+						0.00
 					</div>
 					<div class="col-md-2">
 						Difference
 					</div>
 					<div class="col-md-1">
-						0
+						0.00
 					</div>
 					<div class="col-md-3"> </div>
 				</div>
 				<div class="row" style="margin-top: 1%;">
 					<div class="col-md-2">
-						Knockoffreason
+						Knock Off Reason
 					</div>
 					<div class="col-md-8">
 						<textarea class="form-control" style="min-height:100px;" id="reason" name="extraction" type="text" value="" rows="4" cols="20"></textarea>
@@ -208,7 +210,6 @@
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Match Selected</button>&nbsp;&nbsp;&nbsp;
 						<button class="btn btn-sm btn-success me-2" style="background: red;border-color: red;width:46%" >Clear All Selected</button>
-
 					</div>
 					<div class="col-md-4"></div>
 				</div>
@@ -221,7 +222,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-		$("#navhead").text("Manual KO");
+		$("#navhead").text("Manual Posting & Knockoff");
 		kendodate_format();
 
 	});

@@ -1,5 +1,4 @@
 ﻿@{
-	ViewData["Title"] = "Filetemplate";
 	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 
@@ -7,20 +6,27 @@
 <html>
 <head>
 	<title></title>
-
+	<style>
+		.nav-item.me-2.me-xl-50 {
+			margin-right: 28rem !important;
+		}
+	</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
 	<div class="content-wrapper">
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<div class="card-body" style="margin-top:-1%;">
 				<div class="row" style="margin-top:10px;margin-bottom: 2%;">
-					<div class="col-md-3">
+				@*	<div class="col-md-3">
 						<label for="organization" class="form-label">Recon Type</label><br>
 						<select id="mode" class="form-select form-control">
-							<option value="A">Within Account </option>
-							<option value="I"> Between Account</option>
+							<option value="I">Proof</option>
+							<option value="I" selected>Brs</option>
+							<option value="I">Contra</option>
+							<option value="I">Mirror</option>
+							<option value="I">Value Based</option>							
 						</select>
-					</div>
+					</div>*@
 					<div class="col-md-3">
 						<label for="organization" class="form-label">Recon Name</label><br>
 						<select id="mode" class="form-select form-control">
@@ -62,18 +68,22 @@
 					<table class="table table-bordered table-sm">
 						<thead style="background: #c1c1c1;">
 							<tr class="text-nowrap">
-								<th> Action </th>
-								<th>A/C No</th>
-								<th>Tran Date</th>
-								<th>Tran Desc</th>
-								<th>A/C Mode</th>
+								<th style="width: 50px;"> Action </th>
+								<th>File Name</th>
+								<th>Date</th>
+								<th>Dataset Name</th>															
+								<th>Dataset Type</th>
 								<th>Exception Amount</th>
 								<th>Amount</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr style="height:25px;">
-								<td align="center"> </td>
+								<td align="center">
+									<a data-bs-toggle="modal" style=" cursor:pointer" onclick="rr8()">
+										Map
+									</a>
+								</td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -82,7 +92,11 @@
 								<td></td>
 							</tr>
 							<tr style="height:25px;">
-								<td align="center"> </td>
+								<td align="center">
+									<a data-bs-toggle="modal" style=" cursor:pointer" onclick="rr8()">
+										Map
+									</a>
+								</td>
 								<td></td>
 								<td></td>
 								<td></td>
