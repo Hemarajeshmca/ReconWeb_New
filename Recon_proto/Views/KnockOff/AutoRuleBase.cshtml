@@ -137,16 +137,7 @@
 								<td>Inprocess</td>
 								<td>
 									<div class="tooltip-container">
-										<i data-bs-toggle="modal" data-bs-target="#infomodal" class="fa fa-info cursor-pointer" aria-hidden="true" style="color:green"></i>
-										@*<span class="info-icon">ℹ️</span>
-										<div class="tooltip1">
-											<p><strong>Job Description&nbsp;&nbsp;:&nbsp;</strong>HDFC Bank Presentation 123456</p>
-											<p><strong>Job Initiated Date-Time&nbsp;&nbsp;:&nbsp;</strong>19-09-2023 12:00:00 PM</p>
-											<p><strong>Job Completed Date-Time&nbsp;&nbsp;:&nbsp;</strong></p>
-											<p><strong>Job Initiated By&nbsp;&nbsp;:&nbsp;</strong>Ko</p>
-											<p><strong>Job Status&nbsp;&nbsp;:&nbsp;</strong>Inprocess</p>
-											<p><strong>Job Remark&nbsp;&nbsp;:&nbsp;</strong>process records 1000</p>
-										</div>*@
+										<i data-bs-toggle="modal" data-bs-target="#infomodal" class="fa fa-info cursor-pointer" aria-hidden="true" style="color:green"></i>										
 									</div>
 								</td>
 							</tr>
@@ -158,16 +149,7 @@
 								<td>Inprocess</td>
 								<td>
 									<div class="tooltip-container">
-										<i data-bs-toggle="modal" data-bs-target="#infomodal" class="fa fa-info cursor-pointer" aria-hidden="true" style="color:green"></i>
-										@*<span class="info-icon">ℹ️</span>
-										<div class="tooltip1">
-											<p><strong>Job Description&nbsp;&nbsp;:&nbsp;</strong>HDFC Bank Presentation 123456</p>
-											<p><strong>Job Initiated Date-Time&nbsp;&nbsp;:&nbsp;</strong>19-09-2023 12:00:00 PM</p>
-											<p><strong>Job Completed Date-Time&nbsp;&nbsp;:&nbsp;</strong></p>
-											<p><strong>Job Initiated By&nbsp;&nbsp;:&nbsp;</strong>KO</p>
-											<p><strong>Job Status&nbsp;&nbsp;:&nbsp;</strong>Inprocess</p>
-											<p><strong>Job Remark&nbsp;&nbsp;:&nbsp;</strong>process records 100</p>
-										</div>*@
+										<i data-bs-toggle="modal" data-bs-target="#infomodal" class="fa fa-info cursor-pointer" aria-hidden="true" style="color:green"></i>										
 									</div>
 								</td>
 							</tr>
@@ -180,10 +162,10 @@
 
 	<div class="modal fade" id="infomodal" tabindex="-1" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
+			<div class="modal-content" style="width: 510px;left: 155px;">
 				<div class="modal-header">
 				</div>
-				<div class="modal-body" style="margin-top: -26px;">
+				<div class="modal-body" style="margin-top: -26px;margin-bottom:10px">
 					<div class="row">
 						<div class="col-sm-4">
 						</div>
@@ -196,19 +178,17 @@
 					</div>
 					<hr style="margin-top:-1px; width:100%;">
 					<div class="container">
-
-						<p><strong>Job Description&nbsp;&nbsp;:&nbsp;</strong>HDFC Ledger - 00234123</p>
-						<p><strong>Job Initiated Date-Time&nbsp;&nbsp;:&nbsp;</strong>11-09-2023 12:00:00 PM</p>
-						<p><strong>Job Completed Date-Time&nbsp;&nbsp;:&nbsp;</strong>11-09-2023 02:24:45 PM</p>
-						<p><strong>Job Initiated By&nbsp;&nbsp;:&nbsp;</strong>Excel</p>
-						<p><strong>Job Status&nbsp;&nbsp;:&nbsp;</strong> Completed</p>
-						<p><strong>Job Remark&nbsp;&nbsp;:&nbsp;</strong>Completed records 1000</p>
-
+						<p><strong>Recon Name&nbsp;&nbsp;:&nbsp;</strong>HDFC Ledger - 00234123</p>
+						<p><strong>Ko Initiated Date-Time&nbsp;&nbsp;:&nbsp;</strong>11-09-2023 12:00:00 PM</p>
+						<p><strong>Ko Completed Date-Time&nbsp;&nbsp;:&nbsp;</strong></p>
+						<p><strong>Ko Initiated By&nbsp;&nbsp;:&nbsp;</strong>Vijay</p>
+						<p><strong>KO Execution Status&nbsp;&nbsp;:&nbsp;</strong> Inprocess</p>
+						<p><strong>Ko Remark&nbsp;&nbsp;:&nbsp;</strong>Completed records 1000</p>
+						<p><strong>Ko Exception Status&nbsp;&nbsp;:&nbsp;</strong>20 Records Exceptions</p>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" style="margin-top: -27px;margin-bottom: -12px;">
 					<div class="col-sm-4"> </div>
-
 					<div class="col-sm-4" style="margin-bottom:30px;float: right;">
 						<center><button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr1()">Cancel</button></center>
 					</div>
@@ -221,13 +201,10 @@
 </html>
 
 <script type="text/javascript">
-
 	$(document).ready(function () {
 		$("#navhead").text("Automatic Posting & Knockoff");
 		kendodate_format();
 	});
-
-
 	function rr1() {
 		$("#infomodal").hide();
 	}
