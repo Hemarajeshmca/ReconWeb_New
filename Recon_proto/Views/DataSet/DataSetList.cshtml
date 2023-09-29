@@ -1,112 +1,190 @@
-﻿
-@{
-    ViewData["Title"] = "DataSetList";
-    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+﻿@{
+	ViewData["Title"] = "DataSetList";
+	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 <!Doctype html>
 <html>
 <head>
-    <title></title>
-    <style>
-        .nav-item.me-2.me-xl-50 {
-            margin-right: 33rem !important;
-        }
-        .error_show {
-            color: red;
-            margin-left: 10px;
-        }
+	<title></title>
+	<style>
+		.error_show {
+			color: red;
+			margin-left: 10px;
+		}
 
-        .k-grid.k-widget {
-            height: 360px;
-        }
+		.k-grid.k-widget {
+			height: 360px;
+		}
 
-        .k-grid-header th.k-header > .k-link {
-            width: 100px;
-        }
+		.k-grid-header th.k-header > .k-link {
+			width: 100px;
+		}
 
-        .k-grid-header {
-            font-weight: bold;
-        }
+		.k-grid-header {
+			font-weight: bold;
+		}
 
-        .k-state-active {
-            display: none;
-        }
+		.k-state-active {
+			display: none;
+		}
 
-        .k-content {
-            font-weight: normal;
-            font-size: 13px;
-        }
+		.k-content {
+			font-weight: normal;
+			font-size: 13px;
+		}
 
-        .k-widget.k-window {
-            padding-top: 35px;
-            min-width: 90px;
-            min-height: 50px;
-            width: 700px !important;
-            height: 300px !important;
-            top: 180.766px !important;
-            /*left: 120px !important;*/
-            z-index: 10003;
-            left: 300px !important;
-        }
-    </style>
+		.k-widget.k-window {
+			padding-top: 35px;
+			min-width: 90px;
+			min-height: 50px;
+			width: 700px !important;
+			height: 300px !important;
+			top: 180.766px !important;
+			/*left: 120px !important;*/
+			z-index: 10003;
+			left: 300px !important;
+		}
+	</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
-    <div class="content-wrapper">
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="card-body" style="margin-top:-12px;height: 84%;">
-                <div class="row" style="margin-top:10px">
-                <div class="table-responsive text-nowrap" style="margin-top: -20px;">
-                    <a href="../DataSet/DataSetForm"><i class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green;font-size:15px;"></i></a>
-                    <table class="table table-bordered table-sm">
-                        <thead style="background: #c1c1c1;">
-                            <tr class="text-nowrap">
-                                <th style ="width: 50px;">Action</th>
-                                <th>Dataset code</th>
-                                <th>Dataset Name</th>
-                                <th>Category</th>                               
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="height:25px;">
-                                    <td align="center"><a href="../DataSet/DataSetForm"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></a></td>
-                                <td>DS/060923/001</td>
-                                <td>Hdfc Bank- 123456</td>
-                                    <td>Bank Statement</td>
-                                <td>Active</td>                               
-                            </tr>
-                            <tr style="height:25px;">
-                                    <td align="center"><a href="../DataSet/DataSetForm"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></a></td>
-                                    <td>DS/060923/002</td>
-                                    <td>Invoice-Flexi</td>
-                                    <td>Dump</td>
-                                    <td>Active</td>
-                                </tr>
-                            <tr style="height:25px;">
-                                    <td align="center"><a href="../DataSet/DataSetForm"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></a></td>
-                                    <td>DS/060923/003</td>
-                                    <td>Hdfc Ledger-00234123</td>
-                                    <td>Ledger</td>
-                                    <td>Active</td>
-                                </tr>
-                                <tr style="height:25px;">
-                                    <td align="center"><a href="../DataSet/DataSetForm"><i class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></a></td>
-                                    <td>DS/060923/004</td>
-                                    <td>GRN-Flexi</td>
-                                    <td>Dump</td>
-                                    <td>Active</td>
-                                </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="content-wrapper">
+		<div class="container-xxl flex-grow-1 container-p-y">
+			<div class="card-body" style="margin-top:-33px;">
+				<div class="row" style="margin-top:10px">
+					<div class="col-xs-12">
+						<a href="../DataSet/DataSetForm"><i class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green;font-size:15px;"></i></a>
+						<div id="grid_dataset">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 <script>
-    $(document).ready(function () {
-        $("#navhead").text("Dataset");
-    });
+	$(document).ready(function () {
+		$("#navhead").text("Dataset");
+		grid_dataset_details([]);
+		  var data = {};
+		  data.in_user_gid=0;
+		  data.in_active_status='';
+		   var Context = data;
+            $.ajax({
+                type: "POST",
+                url: '/DataSet/Datasetlistfetch',
+                dataType: 'json',
+                data: JSON.stringify({ in_user_gid: Context.in_user_gid, in_active_status: Context.in_active_status }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (response) {
+					debugger;
+                    if (response != null) {
+                        grid_dataset_details(response);
+                    }
+                    else {
+                        grid_dataset_details([]);
+                    }
+                },
+                error: function (er) {
+                    alert(er)
+                    console.log(er)
+                }
+
+            });
+	});
+	function grid_dataset_details(data) {
+		try {
+			$("#grid_dataset").kendoGrid({
+				dataSource: {
+					data: data,
+					schema: {
+						model: {
+							fields: {
+								dataset_code: { type: "string" },
+								dataset_name: { type: "string" },
+								category: { type: "string" },
+								status: { type: "string" }
+							}
+						}
+					}
+				},			
+				height: 400,
+				groupable: false,
+				dataBound: function (e) {
+					resultData = e.sender._data;
+					var rows = $('#grid_dataset').data('kendoGrid').tbody.children();
+					setColor(rows, resultData);
+				},
+				sortable: true,
+				selectable: true,
+				filterable:true,
+				navigatable: true,
+				columns: [{
+					command: [
+						{		name:"edit",				
+							id: "Edit",
+							template: "<a href='../DataSet/DataSetForm'><img src = '../Assets/images/editicons.png'></a>&nbsp;&nbsp;&nbsp;"
+						},
+						{		name:"view",				
+							id: "View",
+							template: "<a href='../DataSet/DataSetForm'><img src = '../Assets/images/viewicons.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
+						},
+						 {
+                            name: "Delete",
+                            id: "Delete",
+                            template: "<a href=''><img src = '../Assets/images/del.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
+						 },
+					], title: "Action&nbsp;", width: "40px",
+				},
+				{
+					field: "dataset_id",
+					title: "Row id",
+					width: 100,
+					hidden: true,
+				},
+
+				{
+					field: "datasetCode",
+					title: "Dataset Code",
+						 width: 100,
+				},
+				{
+					field: "dataset_name",
+					title: "Dataset Name",
+					width: 100,
+				},
+				{
+					field: "dataset_category",
+					title: "Category",
+					width: 100,
+				},
+				{
+					field: "active_status",
+					title: "Status",					
+					width: 100,
+					hidden: true
+				},
+				{
+					field: "active_status_desc",
+					title: "Status",					
+					width: 100,
+				},
+				{
+					field: "In_mode_flag",
+					title: "Mode",
+					hidden: true
+				}],
+				editable: true,
+				edit: function (e) {
+					var fieldName = e.container.find("input").attr("name");
+					if (fieldName == 'entity_code' && e.model.mode_flag != 'I') { this.closeCell(); }
+				},
+			});
+		}
+		catch (err) {
+			console.log(err)
+
+		}
+	}
+
 </script>
