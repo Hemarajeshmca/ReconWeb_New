@@ -215,8 +215,6 @@
         }
     </style>
 
-
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>DMS</title>
@@ -485,20 +483,15 @@
             });
         }
 
-        function showchangepasswordscreen() {
-            
+        function showchangepasswordscreen() {            
             var url = '@Url.Action("ChangePassword", "Login")'
             window.location.href = url;
         }
 
-
-        /* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
         function myFunction(event) {
             document.getElementById("ddn").classList.toggle("show");
         }
 
-        // Close the dropdown if the user clicks outside of it
         window.onclick = function (event) {
             if (!event.target.matches('.dropbtn')) {
 

@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "QCDMaster";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+<!Doctype html>
+<html>
+<head>
+    <title></title>
+    <style>
+        .nav-item.me-2.me-xl-50 {
+            margin-right: 33rem !important;
+        }
+
+        .border {
+            border: 1px solid #d9dee3 !important;
+            background: #fff;
+        }
+
+        .card-body {
+            position: relative;
+            display: flexbox;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0 solid #d9dee3;
+            border-radius: 0.5rem;
+        }
+
+        #chartdiv {
+            width: 100%;
+            height: 370px;
+        }
+
+        #chartdivs {
+            width: 100%;
+            height: 370px;
+        }
+
+        .amcharts-chart-div > a {
+            display: none !important;
+        }
+
+        text.highcharts-credits {
+            display: none;
+        }
+
+        path.highcharts-button-symbol {
+            display: none;
+        }
+
+        .k-popup.k-list-container {
+            width: 300px !important;
+        }
+
+        .k-webkit {
+            overflow: hidden !important;
+        }
+
+        .error_show {
+            color: red;
+            margin-left: 10px;
+        }
+
+        .k-grid.k-widget {
+            height: 360px;
+        }
+
+        .k-grid-header th.k-header > .k-link {
+            width: 100px;
+        }
+
+        .k-grid-header {
+            font-weight: bold;
+        }
+
+        .k-state-active {
+            display: none;
+        }
+
+        .k-content {
+            font-weight: normal;
+            font-size: 13px;
+        }
+
+        .k-widget.k-window {
+            padding-top: 35px;
+            min-width: 90px;
+            min-height: 50px;
+            width: 700px !important;
+            height: 300px !important;
+            top: 180.766px !important;
+            /*left: 120px !important;*/
+            z-index: 10003;
+            left: 300px !important;
+        }
+
+        div.content-wrapper {
+            min-height: 43px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="card-body" style="margin-top:-12px;height: 84%;">
+          	<div class="row" style="padding-bottom:5px;margin-top:5px;padding-left:30px;padding-right:5px">
+												<div class="col-sm-4">
+													<label for="" class="form-label">Pipeline</label>
+													<select id="Pipeline" class="form-select form-control" onclick="Pipeline()">
+														<option value="excel">Excel - HDFC Bank</option>
+														<option value="scheduled">Scheduled - Oracle GL</option>
+													</select>
+												</div>
+												<div class="col-sm-4">
+													<form id="theuploadformempff">
+														<div class="form-group">
+															<label for="Filename" class="form-label">Choose Excel</label>
+															<input type="file" class="form-control input-lg browse btn btn-primary input-lg" name="File_Import" id="File_Import" style="width: 90%;height: 30px;">
+															<label class="col-md-6 control-label" id="FileName"></label>
+														</div>
+													</form>
+												</div>
+												<div class="col-sm-2" style="margin-top:29px">
+													<label class="form-label"></label>
+													<input type="button" style="background: #38b55a;border-color: #38b55a;width:40%" name="Start" class="btn btn-sm btn-success me-2" value="Start" />
+													
+												</div>
+											</div>
+
+                <div class="col-md-12">
+                    <div id="grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#navhead").text("QCD Master");
+        $("#kendoVersion").text(kendo.version);
+
+        $("#cmbEmployee").kendoComboBox({
+            dataSource: [{ EmployeeID: 1, EmployeeName: "Ash" }],
+            placeholder: "Select",
+            dataTextField: "EmployeeName",
+            dataValueField: "EmployeeID",
+            index: 0,
+            suggest: true,
+            filter: "contains",
+        });
+
+        $("#grid").kendoGrid({
+            dataSource: [{ CustomerID: "1", ContactName: "Aysh1", CompanyName: "ABC", Country: "IND" },
+            { CustomerID: "2", ContactName: "Aysh2", CompanyName: "ABC", Country: "IND" },
+            { CustomerID: "3", ContactName: "Aysh3", CompanyName: "ABC", Country: "IND" },
+            { CustomerID: "4", ContactName: "Aysh4", CompanyName: "ABC", Country: "IND" },
+            { CustomerID: "5", ContactName: "Aysh5", CompanyName: "ABC", Country: "IND" }
+            ],
+            filterable: true,
+            sortable: true,
+            columns: CustomerHelper.GenerateColumns(),
+            editable: false,
+            navigatable: true,
+            selectable: "row"
+        });
+    });
+    var CustomerHelper = {
+        GenerateColumns: function () {
+            return columns = [
+                { field: "CustomerID", title: "ID", width: 40, editable: false },
+                { field: "ContactName", title: "Name", width: 60, editable: false },
+                { field: "CompanyName", title: "Company", width: 60, editable: false },
+                { field: "Country", title: "Country", width: 60, editable: false },
+            ]
+        }
+    }
+
+</script>
