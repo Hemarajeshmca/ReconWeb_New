@@ -6,12 +6,13 @@ using static Recon_proto.Controllers.DataSetController;
 using System.Net.Http.Headers;
 using System.Text;
 using Recon_proto.Models;
+using System.Data;
+using System.Net;
 
 namespace Recon_proto.Controllers
 {
     public class QCDmasterController : Controller
     {
-
         public IActionResult QcdMaster()
         {
             return View();
