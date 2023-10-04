@@ -1,4 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Data;
+using System.Net;
+using static Recon_proto.Controllers.DataSetController;
+using System.Net.Http.Headers;
+using System.Text;
+using Recon_proto.Models;
 using System.Data;
 using System.Net;
 
@@ -11,94 +18,87 @@ namespace Recon_proto.Controllers
             return View();
         }
 
-
-        //public string Login_validation([FromBody] Login_model1 model)
-        //{
-        //    string post_data = "";
-        //    DataTable result = new DataTable();
-        //    List<user_model> objcat_lst = new List<user_model>();
-        //    try
-        //    {
-        //        string hostName = Dns.GetHostName();
-        //        ipAddress = Dns.GetHostAddresses(hostName)[0].ToString();
-
-        //        var pass = Encrypt(model.Password);
-
-        //        Login_model loginmodel = new Login_model();
-        //        loginmodel.user_id = model.UserName;
-        //        loginmodel.password = pass;
-        //        loginmodel.ip = ipAddress;
-        //        loginmodel.msg = "";
-        //        loginmodel.ip_address = "";
-        //        loginmodel.datasource = "";
-        //        loginmodel.user_code = "";
-        //        loginmodel.user_name = "";
-        //        loginmodel.oldpassword = "";
-        //        string post_data1 = _commonController.GetApiResult(JsonConvert.SerializeObject(loginmodel), "Loginvalidation");
-        //        string d2 = JsonConvert.DeserializeObject<string>(post_data1);
-        //        result = JsonConvert.DeserializeObject<DataTable>(d2);
-        //        for (int i = 0; i < result.Rows.Count; i++)
-        //        {
-        //            user_model objcat = new user_model();
-        //            objcat.user_gid = Convert.ToInt32(result.Rows[i]["user_gid"]);
-        //            objcat.user_name = result.Rows[i]["user_name"].ToString();
-        //            objcat.passwordexpdate = result.Rows[i]["password_expiry_date"].ToString();
-        //            objcat.usergroup_gid = Convert.ToInt32(result.Rows[i]["usergroup_code"]);
-        //            objcat.result = Convert.ToInt32(result.Rows[i]["out_result"]);
-        //            objcat.msg = result.Rows[i]["out_msg"].ToString();
-        //            objcat.oldpassworrd = Decrypt(pass);
-        //            objcat.user_status = result.Rows[i]["user_status"].ToString();
-        //            objcat_lst.Add(objcat);
-        //            //ViewBag.userdetails = objcat;
-        //            ViewBag.user_gid = objcat.user_gid;
-        //            ViewBag.user_name = objcat.user_name;
-        //            HttpContext.Session.SetString("usercode", model.UserName);
-        //            HttpContext.Session.SetString("username", result.Rows[i]["user_name"].ToString());
-        //            HttpContext.Session.SetString("mindate", result.Rows[i]["min_tran_date"].ToString());
-        //            HttpContext.Session.SetString("fin_date", result.Rows[i]["fin_start_date"].ToString());
-        //            HttpContext.Session.SetString("user_code", result.Rows[i]["user_gid"].ToString());
-        //            HttpContext.Session.SetString("usergroup_code", result.Rows[i]["usergroup_code"].ToString());
-        //            HttpContext.Session.SetString("userrole", "ADMIN");
-        //        }
+        [HttpPost]
+        public JsonResult QcdMasterGridRead([FromBody] QcdlistModal context)
+        {
+            QcdlistModal objList = new QcdlistModal();
+            DataTable result = new DataTable();
+            List<QcdMasterModel> objcat_lst = new List<QcdMasterModel>();
+            string post_data = "";
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44348/api/qcdmaster/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(context), UTF8Encoding.UTF8, "application/json");
+                var response = client.PostAsync("QcdMasterGridRead", content).Result;
+                Stream data = response.Content.ReadAsStreamAsync().Result;
+                StreamReader reader = new StreamReader(data);
+                post_data = reader.ReadToEnd();
+                string d2 = JsonConvert.DeserializeObject<string>(post_data);
+                result = JsonConvert.DeserializeObject<DataTable>(d2);
+                for (int i = 0; i < result.Rows.Count; i++)
+                {
+                    QcdMasterModel objcat = new QcdMasterModel();
+                    objcat.master_gid = Convert.ToInt32(result.Rows[i]["master_gid"]);
+                    objcat.master_syscode = result.Rows[i]["master_syscode"].ToString();
+                    objcat.master_code = result.Rows[i]["master_code"].ToString();
+                    objcat.master_short_code = result.Rows[i]["master_short_code"].ToString();
+                    objcat.master_name = result.Rows[i]["master_name"].ToString();
+                    objcat.parent_master_syscode = result.Rows[i]["parent_master_syscode"].ToString();
+                    objcat.active_status = result.Rows[i]["active_status"].ToString();
+                    objcat.active_status_desc = result.Rows[i]["active_status_desc"].ToString();
+                    objcat.master_multiple_name = result.Rows[i]["master_multiple_name"].ToString();
+                    objcat_lst.Add(objcat);
+                }
+                return Json(objcat_lst);
+            }
+        }
 
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string control = this.RouteData.Values["controller"].ToString();
-        //        _logger.LogError(ex, $"An error occurred in {control}");
-        //    }
+        [HttpPost]
+        public JsonResult QcdCrud([FromBody] QcdCrudModal context)
+        {
+            QcdCrudModal objList = new QcdCrudModal();
+            DataTable result = new DataTable();
+            string post_data = "";
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44348/api/qcdmaster/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(context), UTF8Encoding.UTF8, "application/json");
+                var response = client.PostAsync("QcdMaster", content).Result;
+                Stream data = response.Content.ReadAsStreamAsync().Result;
+                StreamReader reader = new StreamReader(data);
+                post_data = reader.ReadToEnd();
+                string d2 = JsonConvert.DeserializeObject<string>(post_data);
+               // result = JsonConvert.DeserializeObject<DataTable>(d2);
+                return Json(d2);
+            }
+        }
 
-        //    return JsonConvert.SerializeObject(objcat_lst);
-        //}
 
-        //public ActionResult QcdMasterRead([DataSourceRequest] DataSourceRequest request, QcdMaster Qcdmastergrid)   // ProgressView  Read
-        //{
-        //    List<QcdMaster> objcat_lst = new List<QcdMaster>();
-        //    DataTable result = new DataTable();
-        //    QcdMaster QcdMasterRead = new QcdMaster();
+        public class QcdlistModal
+        {
+            public string? in_user_code { get; set; }
+            public string? in_master_code { get; set; }
 
+        }
 
-        //    string post_data = objcommon.getApiResult(JsonConvert.SerializeObject(QcdMasterRead), "QcdMasterRead");
-        //    result = (DataTable)JsonConvert.DeserializeObject(post_data, result.GetType());
+        public class QcdCrudModal
+        {
+            public string? masterCode { get; set; }
+            public string? active_status { get; set; }
+            public string? action { get; set; }
+            public int? masterGid { get; set; }
+            public string? mastermutiplename { get; set; }
+            public string? masterName { get; set; }
+            public string? masterShortCode { get; set; }
+            public string? masterSyscode { get; set; }
+            public string? parentMasterSyscode { get; set; }
 
-
-
-        //    for (int i = 0; i < result.Rows.Count; i++)
-        //    {
-        //        QcdMaster objcat = new QcdMaster();
-        //        objcat.masterGid = Convert.ToInt32(result.Rows[i]["master_gid"]);
-        //        objcat.masterSyscode = result.Rows[i]["master_syscode"].ToString();
-        //        objcat.masterCode = result.Rows[i]["master_code"].ToString();
-        //        objcat.masterName = result.Rows[i]["master_name"].ToString();
-        //        objcat_lst.Add(objcat);
-
-        //    }
-
-        //    //return Json(objcat_lst.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        //    return Json(objcat_lst, JsonRequestBehavior.AllowGet);
-
-        //}
+        }
 
     }
 }
