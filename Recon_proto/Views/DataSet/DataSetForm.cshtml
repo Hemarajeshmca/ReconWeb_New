@@ -1,247 +1,501 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 <!Doctype html>
 <html>
 <head>
-    <title></title>
-    <style>
-        .nav-item.me-2.me-xl-50 {
-            margin-right: 33rem !important;
-        }
-        .error_show {
-            color: red;
-            margin-left: 10px;
-        }
+	<title></title>
+	<style>
+		.nav-item.me-2.me-xl-50 {
+			margin-right: 33rem !important;
+		}
 
-        .k-grid.k-widget {
-            height: 360px;
-        }
+		.error_show {
+			color: red;
+			margin-left: 10px;
+		}
 
-        .k-grid-header th.k-header > .k-link {
-            width: 100px;
-        }
+		.k-grid.k-widget {
+			height: 360px;
+		}
 
-        .k-grid-header {
-            font-weight: bold;
-        }
+		.k-grid-header th.k-header > .k-link {
+			width: 100px;
+		}
 
-        .k-state-active {
-            display: none;
-        }
+		.k-grid-header {
+			font-weight: bold;
+		}
 
-        .k-content {
-            font-weight: normal;
-            font-size: 13px;
-        }
+		.k-state-active {
+			display: none;
+		}
 
-        .k-widget.k-window {
-            padding-top: 35px;
-            min-width: 90px;
-            min-height: 50px;
-            width: 700px !important;
-            height: 300px !important;
-            top: 180.766px !important;
-            /*left: 120px !important;*/
-            z-index: 10003;
-            left: 300px !important;
-        }
-    </style>
+		.k-content {
+			font-weight: normal;
+			font-size: 13px;
+		}
+
+		.k-widget.k-window {
+			padding-top: 35px;
+			min-width: 90px;
+			min-height: 50px;
+			width: 700px !important;
+			height: 300px !important;
+			top: 180.766px !important;
+			/*left: 120px !important;*/
+			z-index: 10003;
+			left: 300px !important;
+		}
+	</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
-    <div class="content-wrapper">
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="card-body" style="margin-top:-12px;height: 84%;">
-                <form method="post" class="form-horizontal" id="form" enctype="multipart/form-data">
-                    <div class="row" style="margin-top: -18px;margin-bottom: 10px;">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <label for="organization" class="form-label">Dataset Code</label>
-                                    <input class="form-control" type="text" name="coursedesc" id="coursedesc" value="" disabled>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="organization" class="form-label">Mode</label>
-                                    <input class="form-control" type="text" name="coursedesc" id="coursedesc" value="Create" disabled>
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="organization" class="form-label">Status</label><br>
-                                    <input class="form-control" type="text" name="coursedesc" id="coursedesc" value="Active" disabled>
-                                   @* <select id="mode" class="form-select form-control">
-                                        <option value="A">Active</option>
-                                        <option value="I">InActive</option>
-                                    </select>*@
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-5">
-                        </div>
-                        <div class="col-sm-1" style="margin-top:20px;">
-                            <center>
-                                <a href="../DataSet/DataSetList"><img style="cursor:pointer;" src="~/Content/images/toplist.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            </center>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top:10px;">
-                        <div class="col-sm-4">
-                            <label class="form-label" for="subvertical">Dataset Name&nbsp;<span style="font-size: 12px;color: red;font-weight: bold;">*</span></label>
-                            @Html.TextBox("DatasetName", "", new { @class = "form-control" })
-                        </div>
-                        <div class="col-sm-4">
-                            <label class="form-label" for="subvertical">Category&nbsp;<span style="font-size: 12px;color: red;font-weight: bold;">*</span></label>
-                            <select id="mode" class="form-select form-control">
-                                <option value="I">Bank Statement</option>
-                                <option value="I">Ledger</option>
-                                <option value="I">Dump</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <label class="form-label" for="subvertical">Clone Dataset&nbsp;</label>
-                            <select id="mode" class="form-select form-control">
-                                <option value="I">Hdfc Bank- 123456</option>
-                                <option value="I">Invoice-Flexi</option>
-                                <option value="I">Hdfc Ledger-00234123</option>
-                                <option value="I">GRN-Flexi</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-2" style="margin-top:30px">
-                            <button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Clone</button>&nbsp;&nbsp;&nbsp;
-                        </div>
-                      
-                    </div>
-                   
-                   
-                    <div class="row" style="margin-top:10px;">
-                        <div class="table-responsive text-nowrap">                           
-                            <i data-bs-toggle="modal" data-bs-target="#newdebit" class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green"></i>
-                            <table class="table table-bordered table-sm">
-                                <thead style="background: #c1c1c1;">
-                                    <tr class="text-nowrap">
-                                        <th style="width: 50px;">Action</th>
-                                        <th style="width: 50px;">Sl no</th>
-                                        <th>Dataset Field</th>                                        
-                                        <th>Field Type</th>
-                                        <th>Field Length</th>
-                                        <th>Mandatory</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr style="height:25px;">
-                                        <td align="center"><i data-bs-toggle="modal" data-bs-target="#newdebit" class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr style="height:25px;">
-                                        <td align="center"><i data-bs-toggle="modal" data-bs-target="#newdebit" class="fa fa-pencil" aria-hidden="true" style="font-size: 12px;color: #5490ff;"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-eye" aria-hidden="true" style="color:brown"></i></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>                                   
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+	<div class="content-wrapper">
+		<div class="container-xxl flex-grow-1 container-p-y">
+			<div class="card-body" style="margin-top:-12px;height: 84%;">
+				<form method="post" class="form-horizontal" id="form" enctype="multipart/form-data">
+					<div class="row" style="margin-top: -18px;margin-bottom: 10px;">
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="lbldatasetcode" class="form-label">Dataset Code</label>
+									<input class="form-control" type="text" id="txtdatasetcode">
+								</div>
+								<div class="col-sm-4">
+									<label for="lblmode" class="form-label">Mode</label>
+									<input class="form-control" type="text" id="txtmode" value="Create" disabled>
+								</div>
+								<div class="col-sm-4">
+									<label for="lblstatus" class="form-label">Status</label><br>
+									<input class="form-control" type="text" id="txtstatus" value="Active" disabled>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-5">
+						</div>
+						<div class="col-sm-1" style="margin-top:20px;">
+							<center>
+								<a href="../DataSet/DataSetList"><img style="cursor:pointer;" src="~/Content/images/toplist.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+							</center>
+						</div>
+					</div>
+					<div class="row" style="margin-top:10px;">
+						<div class="col-sm-4">
+							<label class="form-label" for="subvertical">Dataset Name&nbsp;<span style="font-size: 12px;color: red;font-weight: bold;">*</span></label>
+							<input class="form-control" type="text" id="datasetname">
+							<input class="form-control" type="hidden" id="datasetgid">
+						</div>
+						<div class="col-sm-4">
+							<label class="form-label" for="subvertical">Category&nbsp;<span style="font-size: 12px;color: red;font-weight: bold;">*</span></label>
+							<select id="cmbcategory" class="form-select form-control">								
+							</select>
+						</div>
+						<div class="col-sm-2">
+							<label class="form-label" for="subvertical">Clone Dataset&nbsp;</label>
+							<select id="Cmbclone" class="form-select form-control">								
+							</select>
+						</div>
+						<div class="col-sm-2" style="margin-top:30px">
+							<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Clone</button>&nbsp;&nbsp;&nbsp;
+						</div>
 
-                    <div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:10px;padding-right:10px">
-                        <div class="col-sm-4">
-                        </div>
-                        <div class="col-sm-4" style="margin-top:2%;">
-                            <button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
-                            <a href="../DataSet/DataSetList" class="btn btn-sm btn-success me-2" style="background: red;border-color: red;width:40%;cursor:pointer;">Cancel</a>
-                        </div>
-                        <div class="col-sm-4">
-                        </div>
-                    </div>
-                    
-                    <div class="modal fade" id="newdebit" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                </div>
-                                <div class="modal-body" style="margin-top: -26px;">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <h4 style="font-size: 15px;text-align: center;color: #1a9950;font-weight: 600;">Dataset Mapping</h4>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <i class="bx bx-x cursor-pointer" data-bs-dismiss="modal" style="color: #000000;float:right"></i>
-                                        </div>
-                                    </div>
-                                    <hr style="margin-top:-1px; width:100%;">
-                                    <div class="container">
-                                        <div class="row" style="padding-bottom:5px;margin-top:5px;padding-left:30px;padding-right:5px">
-                                            <div class="col-sm-4">
-                                                <label for="" class="form-label">Dataset Field</label>
-                                                <input class="form-control" id="AccountNo" name="AccountNo" type="text" value="" data-bind="value:AccountNo" style="width:92%;">
-                                            </div>
-                                           
-                                            <div class="col-sm-4">
-                                                <label for="" class="form-label">Field Type&nbsp;</label>
-                                                <select id="FieldType" class="form-select form-control">
-                                                    <option value="Text">Text</option>
-                                                    <option value="Number">Number</option>
-                                                    <option value="Number">Date</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <label for="" class="form-label">Field Length&nbsp;</label>
-                                                <input class="form-control" id="AccountName" name="AccountName" type="text" value="" data-bind="value:Field Length" style=" width:92%;">
-                                            </div>
-                                        </div>
-                                        <div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:30px;padding-right:5px">
-                                            <div class="col-sm-4">
-                                                <label for="" class="form-label">Mandatory&nbsp;</label>
-                                                <div style="margin-left:2px;margin-top:5px">
-                                                    <input type="radio" id="mandatory" name="mandatory" value="Y" >&nbsp;&nbsp;Yes&nbsp;
-                                                    <input type="radio" id="mandatory" style="margin-left: 10px;" name="mandatory" checked value="N">&nbsp;&nbsp;No&nbsp;
-                                                </div>
-                                            </div>
-                                           @* <div class="col-sm-4">
-                                                <label for="" class="form-label">Status&nbsp;</label>
-                                                <div style="margin-left:2px;margin-top:5px">
-                                                    <input type="radio" id="Status" name="Status" value="Y" checked>&nbsp;&nbsp;Active&nbsp;
-                                                    <input type="radio" id="Status" style="margin-left: 10px;" name="Status" value="N">&nbsp;&nbsp;InActive&nbsp;
-                                                </div>
-                                            </div>*@
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4" style="margin-top:30px;float: right;">
-                                        <center><button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr1()">Cancel</button></center>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+					</div>
+
+
+					<div class="row" style="margin-top:20px;">
+						<div class="col-xs-12">
+							<i data-bs-toggle="modal" data-bs-target="#newdebit" class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green"></i>
+							<div id="grid_datasetfield">
+							</div>
+						</div>
+					</div>
+
+					<div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:10px;padding-right:10px">
+						<div class="col-sm-4">
+						</div>
+						<div class="col-sm-4" style="margin-top:2%;">
+							<button type="button" class="btn btn-sm btn-success me-2" onclick="saveheader()" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
+							<a href="../DataSet/DataSetList" class="btn btn-sm btn-success me-2" style="background: red;border-color: red;width:40%;cursor:pointer;">Cancel</a>
+						</div>
+						<div class="col-sm-4">
+						</div>
+					</div>
+
+					<div class="modal fade" id="newdebit" tabindex="-1" aria-hidden="true">
+						<div class="modal-dialog modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								</div>
+								<div class="modal-body" style="margin-top: -26px;">
+									<div class="row">
+										<div class="col-sm-4">
+										</div>
+										<div class="col-sm-4">
+											<h4 style="font-size: 15px;text-align: center;color: #1a9950;font-weight: 600;">Dataset Mapping</h4>
+										</div>
+										<div class="col-sm-4">
+											<i class="bx bx-x cursor-pointer" data-bs-dismiss="modal" style="color: #000000;float:right"></i>
+										</div>
+									</div>
+									<hr style="margin-top:-1px; width:100%;">
+									<div class="container">
+										<div class="row" style="padding-bottom:5px;margin-top:5px;padding-left:30px;padding-right:5px">
+											<div class="col-sm-4">
+												<label for="" class="form-label">Dataset Field</label>
+												<input class="form-control" id="datasetfield" type="text" style="width:92%;">
+												<input class="form-control" type="hidden" id="datasetdetail_id">
+												<input class="form-control" type="hidden" id="txtmodeflag" value="Create">
+											</div>
+
+											<div class="col-sm-4">
+												<label for="" class="form-label">Field Type&nbsp;</label>
+												<select id="FieldType" class="form-select form-control">
+													<option value="Text">Text</option>
+													<option value="Number">Number</option>
+													<option value="Date">Date</option>
+												</select>
+											</div>
+											<div class="col-sm-4">
+												<label for="" class="form-label">Field Length&nbsp;</label>
+												<input class="form-control" id="fieldlength" type="text" style=" width:92%;">
+											</div>
+										</div>
+										<div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:30px;padding-right:5px">
+											<div class="col-sm-4">
+												<label for="" class="form-label">Mandatory&nbsp;</label>
+												<div style="margin-left:2px;margin-top:5px">
+													<input type="radio" id="mandatory1" name="mandatory" value="Y">&nbsp;&nbsp;Yes&nbsp;
+													<input type="radio" id="mandatory2" style="margin-left: 10px;" name="mandatory" value="N">&nbsp;&nbsp;No&nbsp;
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4" style="margin-top:30px;float: right;">
+										<center>
+											<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%" onclick="savedetail()">Save</button>&nbsp;&nbsp;&nbsp;
+											<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr1()">Cancel</button>
+										</center>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#navhead").text("Dataset");       
-    });
-    function rr() {
-        $("#newdebit").show();
-    }
-    function rr1() {
-        window.location.href = "../DataSet/DataSetForm";
-    }
-    function rr7(){
-        debugger;
-       window.location.href = "../DataSet/DataSetList";
-    }
+<script>
+	$(document).ready(function () {
+		$("#navhead").text("Dataset");
+		grid_datasetfield([]);
+		getGridComboList();
+		if (getlocalStorage('btn_clk_val') == "Create") {
+			$("#txtmode").val(getlocalStorage('btn_clk_val'));
+			$("#txtstatus").val(data.active_status_desc);
+		}
+		else if (getlocalStorage('btn_clk_val') == "View" || getlocalStorage('btn_clk_val') == "Edit") {
+			if (getlocalStorage("ls_pageList") != undefined) {
+				var data = getlocalStorage("ls_pageList");
+				$("#txtmode").val(getlocalStorage('btn_clk_val'));
+				$("#datasetname").val(data.dataset_name);
+				$("#category").val(data.dataset_category);
+				$("#txtdatasetcode").val(data.datasetCode);
+				$("#txtstatus").val(data.active_status_desc);
+				$("#datasetgid").val(data.dataset_id);
+				$.ajax({
+					type: "POST",
+					url: '/DataSet/Datasetdetailreadlist',
+					dataType: 'json',
+					data: JSON.stringify({ datasetCode: data.datasetCode }),
+					contentType: 'application/json; charset=utf-8',
+					success: function (response) {
+						if (response != null) {
+							grid_datasetfield(response);
+						}
+						else {
+							grid_datasetfield([]);
+						}
+					},
+					error: function (er) {
+						alert(er)
+						console.log(er)
+					}
+
+				});
+			}
+		}
+	});
+	function saveheader() {
+		debugger;
+		try {
+			var dataset_name = $("#datasetname").val();
+			var dataset_category = $("#category").val();
+			var dataset_code = $("#txtdatasetcode").val();
+			var action = "";
+			if ($("#txtmode").val() == "Create") {
+				action = "INSERT"
+			} else if ($("#txtmode").val() == "Edit") {
+				action = "UPDATE"
+			}
+			var action_by = "vijay"
+			var dataset_id = 0;
+			if (dataset_id > 0) {
+				dataset_id = $("datasetgid").val();
+			}
+			var status = 0;
+			if ($("#txtstatus").val() == "Active") {
+				status = "Y"
+			} else {
+				status = "N"
+			}
+			$.ajax({
+				type: "POST",
+				url: '/DataSet/Datasetheader',
+				dataType: 'json',
+				data: JSON.stringify({ dataset_name: dataset_name, dataset_category: dataset_category, datasetCode: dataset_code, in_action: action, in_action_by: action_by, dataset_id: dataset_id, active_status: status }),
+				contentType: 'application/json; charset=utf-8',
+				success: function (response) {
+					debugger;
+					if (response != null) {
+						$.alert({
+							title: 'Recon',
+							content: response.out_msg,
+							type: 'green',
+						});
+					}
+					else {
+
+					}
+				},
+				error: function (er) {
+					alert(er)
+					console.log(er)
+				}
+
+			});
+		}
+		catch (e) {
+			console.log(e)
+		}
+	}
+	function rr() {
+		$("#newdebit").show();
+	}
+	function rr1() {
+		window.location.href = "../DataSet/DataSetForm";
+	}
+	function rr7() {
+		debugger;
+		window.location.href = "../DataSet/DataSetList";
+	}
+	function grid_datasetfield(data) {
+		$("#grid_datasetfield").kendoGrid({
+			dataSource: {
+				data: data,
+				schema: {
+					model: {
+						fields: {
+							slno: { type: "string" },
+							field_name: { type: "string" },
+							field_type: { type: "string" },
+							field_length: { type: "string" },
+							field_mandatory: { type: "string" },
+							In_mode_flag: { type: "string", defaultValue: "I" }
+						}
+					}
+				}
+			},
+			height: 300,
+			groupable: false,
+			dataBound: function (e) {
+				resultData = e.sender._data;
+				var rows = $('#grid_datasetfield').data('kendoGrid').tbody.children();
+				//setColor(rows, resultData);
+			},
+			sortable: true,
+			selectable: true,
+			filterable: true,
+			navigatable: true,
+			pageable: true,
+			columns: [{
+				command: [
+					{
+						name: "edit",
+						id: "Edit",
+						template: "<a href='' onclick='getdetailSelectedRows()' value='edit' data-bs-toggle='modal'><img src = '../Assets/images/editicons.png'></a>&nbsp;&nbsp;&nbsp;",
+					},
+					{
+						name: "Delete",
+						id: "Delete",
+						template: "<a href=''><img src = '../Assets/images/del.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
+					},
+				], title: "Action&nbsp;", width: "40px",
+			},
+			{
+				field: "datasetdetail_id",
+				title: "datasetdetail_id",
+				width: 100,
+				hidden: true,
+			},
+			{
+				field: "slno",
+				title: "Sl no",
+				width: 100,
+				hidden: true,
+			},
+			{
+				field: "field_name",
+				title: "Dataset Field",
+				width: 100,
+			},
+			{
+				field: "field_type",
+				title: "Field Type",
+				width: 100,
+			},
+			{
+				field: "field_length",
+				title: "Field Length",
+				width: 100,
+			},
+			{
+				field: "field_mandatory",
+				title: "Mandatory",
+				width: 100,
+			},
+
+			{
+				field: "In_mode_flag",
+				title: "Mode",
+				hidden: true
+			}],
+			editable: false,
+
+		});
+	}
+	function savedetail() {
+		try {
+			var datasetfield = $("#datasetfield").val();
+			var FieldType = $("#FieldType").val();
+			var fieldlength = $("#fieldlength").val();
+			var dataset_code = $("#txtdatasetcode").val();
+			var action = "";
+			if ($("#txtmodeflag").val() == "Create") {
+				action = "INSERT"
+			} else if ($("#txtmodeflag").val() == "Edit") {
+				action = "UPDATE"
+			}
+			var action_by = "vijay"
+			var datasetdetail_id = 0;
+			if (datasetdetail_id > 0) {
+				datasetdetail_id = $("datasetdetail_id").val();
+			}
+			var status = 0;
+			if ($("txtstatus").val() == "Active") {
+				status = "Y"
+			} else {
+				status = "N"
+			}
+			var mandatory = $("input[name='mandatory']:checked").val();
+			$.ajax({
+				type: "POST",
+				url: '/DataSet/Datasetdetail',
+				dataType: 'json',
+				data: JSON.stringify({ datasetCode: dataset_code, datasetdetail_id: datasetdetail_id, field_name: datasetfield, in_action: action, in_action_by: action_by, field_length: fieldlength, field_type: FieldType, field_mandatory: mandatory }),
+				contentType: 'application/json; charset=utf-8',
+				success: function (response) {
+					debugger;
+					if (response != null) {
+						$.alert({
+							title: 'Recon',
+							content: response.out_msg,
+							type: 'green',
+						});
+					}
+					else {
+						$.alert({
+							title: 'Recon',
+							content: response.out_msg,
+							type: 'green',
+						});
+					}
+				},
+				error: function (er) {
+					alert(er)
+					console.log(er)
+				}
+
+			});
+		}
+		catch (e) {
+			console.log(e)
+		}
+	}
+	function getdetailSelectedRows() {
+		var grid = $("#grid_datasetfield").data("kendoGrid");
+		var selectedItem = grid.dataItem(grid.select());
+		$("#datasetfield").val(selectedItem.field_name);
+		$("#datasetdetail_id").val(selectedItem.datasetdetail_id);
+		$("#txtmodeflag").val("edit");
+		$("#FieldType").val(selectedItem.field_type);
+		$("#fieldlength").val(selectedItem.field_length);
+		if (selectedItem.field_mandatory == "Yes") {
+			$("#mandatory1").prop("checked", true);
+		} else {
+			$("#mandatory2").prop("checked", true);
+		}
+		$("#newdebit").modal('show');
+	}
+	function getGridComboList() {
+		var data = {};
+		data.in_user_gid = 0;
+		data.in_active_status = '';
+		var Context = data;
+		$.ajax({
+			type: "POST",
+			url: '/DataSet/Datasetlistfetch',
+			dataType: 'json',
+			data: JSON.stringify({ in_user_gid: Context.in_user_gid, in_active_status: Context.in_active_status }),
+			contentType: 'application/json; charset=utf-8',
+			success: function (response) {
+				$("#Cmbclone").empty();
+				$("#Cmbclone").append($('<option>', {
+					value: "",
+					text: "  Select  "
+				}));
+				$.each(response, function (index, item) {
+					$("#Cmbclone").append($('<option>', {
+						value: item.datasetCode,
+						text: item.dataset_name
+					}));
+				});					
+			}
+		});
+		var in_master_code = "QCD_DS_CATEGORY";
+		var in_user_code = "sundar";
+		$.ajax({
+			type: "POST",
+			url: '/Common/Qcdmaster',
+			dataType: 'json',
+			data: JSON.stringify({ in_user_code: in_user_code, in_master_code: in_master_code }),
+			contentType: 'application/json; charset=utf-8',
+			success: function (response) {
+				$("#cmbcategory").empty();
+				$("#cmbcategory").append($('<option>', {
+					value: "",
+					text: "  Select  "
+				}));
+				$.each(response, function (index, item) {
+					$("#cmbcategory").append($('<option>', {
+						value: item.master_code,
+						text: item.master_name
+					}));
+				});
+			}
+		});
+	}
 </script>
 
 

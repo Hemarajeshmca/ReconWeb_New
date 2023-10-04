@@ -89,7 +89,7 @@
 			position: fixed;
 			display: block;
 			opacity: 0.6;
-			background: #aaaaaa url('~/Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png');
+			background: #aaaaaa url('~/content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png');
 			z-index: 1006;
 			text-align: center;
 			display: none;
@@ -616,6 +616,52 @@
 
 			alert($('#orglvl1valO').val());
 		}
+		function btn_onClick(event) {
+			click_btn_val = "";
+			if (event != "") {
+				if (event == "Create") {
+					click_btn_val = "Create";
+				}
+				else if (event == "Edit") {
+					click_btn_val = "Edit";
+				}
+				else if (event == "View") {
+					click_btn_val = "View";
+				}
+				else
+					click_btn_val = "";
+				setlocalStorage('btn_clk_val', click_btn_val);
+				//document.location = form_list_url;
+			}
+		}
+		function setlocalStorage(key, value) {		
+			var data = "";
+			data[key] = value[0];
+			localStorage.setItem(key, JSON.stringify(value));
+		}
+
+		function getlocalStorage(key) {
+			var guid = localStorage.getItem(key);			
+			return JSON.parse(guid);
+		}
+		
+		function setColor(rows, resultData) {
+			for (var i = 0; i < rows.length; i++) {
+				var row = $(rows[i]);
+				if (resultData[i].mode_flag == "I" || resultData[i].mode_flag == "T") {
+					row.css('backgroundColor', 'lightgreen');
+				}
+				else if (resultData[i].mode_flag == "D") {
+					row.css('backgroundColor', '#ff3333');
+				}
+			}
+			var child_del = $('.k-grid-Delete').children('span:first');
+			$('.k-grid-Delete').html(child_del);
+
+			var child_copy = $('.k-grid-Copy').children('span:first');
+			$('.k-grid-Copy').html(child_copy);
+		}
+		
 	</script>
 </body>
 </html>

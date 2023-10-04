@@ -65,32 +65,32 @@
 <script>
 	$(document).ready(function () {
 		$("#navhead").text("Dataset");
+		setlocalStorage("ls_pageList", "");
 		grid_dataset_details([]);
-		  var data = {};
-		  data.in_user_gid=0;
-		  data.in_active_status='';
-		   var Context = data;
-            $.ajax({
-                type: "POST",
-                url: '/DataSet/Datasetlistfetch',
-                dataType: 'json',
-                data: JSON.stringify({ in_user_gid: Context.in_user_gid, in_active_status: Context.in_active_status }),
-                contentType: 'application/json; charset=utf-8',
-                success: function (response) {
-					debugger;
-                    if (response != null) {
-                        grid_dataset_details(response);
-                    }
-                    else {
-                        grid_dataset_details([]);
-                    }
-                },
-                error: function (er) {
-                    alert(er)
-                    console.log(er)
-                }
+		var data = {};
+		data.in_user_gid = 0;
+		data.in_active_status = '';
+		var Context = data;
+		$.ajax({
+			type: "POST",
+			url: '/DataSet/Datasetlistfetch',
+			dataType: 'json',
+			data: JSON.stringify({ in_user_gid: Context.in_user_gid, in_active_status: Context.in_active_status }),
+			contentType: 'application/json; charset=utf-8',
+			success: function (response) {
+				if (response != null) {
+					grid_dataset_details(response);
+				}
+				else {
+					grid_dataset_details([]);
+				}
+			},
+			error: function (er) {
+				alert(er)
+				console.log(er)
+			}
 
-            });
+		});
 	});
 	function grid_dataset_details(data) {
 		try {
@@ -107,7 +107,7 @@
 							}
 						}
 					}
-				},			
+				},
 				height: 400,
 				groupable: false,
 				dataBound: function (e) {
@@ -117,23 +117,28 @@
 				},
 				sortable: true,
 				selectable: true,
-				filterable:true,
+				filterable: true,
 				navigatable: true,
+				change: selectRow,
 				columns: [{
 					command: [
-						{		name:"edit",				
-							id: "Edit",
-							template: "<a href='../DataSet/DataSetForm'><img src = '../Assets/images/editicons.png'></a>&nbsp;&nbsp;&nbsp;"
+						{
+							name: "edit",
+							id: "btn_Edit",							
+							template: "<a href='' onclick='getSerializedSelectedRows(this)' value='edit' data-bs-toggle='modal'><img src = '../Assets/images/editicons.png'></a>&nbsp;&nbsp;&nbsp;",
+						
 						},
-						{		name:"view",				
+						{
+							name: "view",
 							id: "View",
-							template: "<a href='../DataSet/DataSetForm'><img src = '../Assets/images/viewicons.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
+							template: "<a href=''onclick='getSerializedSelectedRows(this)' value='view'><img src = '../Assets/images/viewicons.png'></a>&nbsp;&nbsp;&nbsp;",
+							
 						},
-						 {
-                            name: "Delete",
-                            id: "Delete",
-                            template: "<a href=''><img src = '../Assets/images/del.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
-						 },
+						{
+							name: "Delete",
+							id: "Delete",
+							template: "<a href=''><img src = '../Assets/images/del.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
+						},
 					], title: "Action&nbsp;", width: "40px",
 				},
 				{
@@ -146,7 +151,7 @@
 				{
 					field: "datasetCode",
 					title: "Dataset Code",
-						 width: 100,
+					width: 100,
 				},
 				{
 					field: "dataset_name",
@@ -160,13 +165,13 @@
 				},
 				{
 					field: "active_status",
-					title: "Status",					
+					title: "Status",
 					width: 100,
 					hidden: true
 				},
 				{
 					field: "active_status_desc",
-					title: "Status",					
+					title: "Status",
 					width: 100,
 				},
 				{
@@ -174,11 +179,8 @@
 					title: "Mode",
 					hidden: true
 				}],
-				editable: true,
-				edit: function (e) {
-					var fieldName = e.container.find("input").attr("name");
-					if (fieldName == 'entity_code' && e.model.mode_flag != 'I') { this.closeCell(); }
-				},
+				editable: false,
+
 			});
 		}
 		catch (err) {
@@ -187,4 +189,37 @@
 		}
 	}
 
+	function getSerializedSelectedRows(mode) {
+		try {
+			if (getlocalStorage("ls_pageList") != undefined) {
+				var items = getlocalStorage("ls_pageList");
+				if (items.length == 0) {
+					kendoAlert("Please select records");
+				}
+				else {
+					if ($(mode).attr('value') == "edit") {
+						btn_onClick("Edit");
+						document.location = '../DataSet/DataSetForm';
+					}
+					else if (mode == "view") {
+						btn_onClick('View');
+						document.location = "../DataSet/DataSetForm";
+					}
+				}
+			}
+		}
+		catch (err) {
+
+		}
+	}
+	function selectRow() {
+		try {
+			var grid = $("#grid_dataset").data("kendoGrid");
+			var selectedItem = grid.dataItem(grid.select());
+			setlocalStorage("ls_pageList", selectedItem);
+		}
+		catch (err) {
+
+		}
+	}
 </script>
