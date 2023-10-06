@@ -81,17 +81,17 @@
 					</div>
 					<div class="row" style="margin-top:10px;">
 						<div class="col-sm-4">
-							<label class="form-label" for="subvertical">Dataset Name&nbsp;<span style="font-size: 12px;color: red;font-weight: bold;">*</span></label>
+							<label class="form-label" for="">Dataset Name&nbsp;<span style="font-size: 12px;color: red;font-weight: bold;">*</span></label>
 							<input class="form-control" type="text" id="datasetname">
 							<input class="form-control" type="hidden" id="datasetgid">
 						</div>
 						<div class="col-sm-4">
-							<label class="form-label" for="subvertical">Category&nbsp;<span style="font-size: 12px;color: red;font-weight: bold;">*</span></label>
+							<label class="form-label" for="">Category&nbsp;<span style="font-size: 12px;color: red;font-weight: bold;">*</span></label>
 							<select id="cmbcategory" class="form-select form-control">								
 							</select>
 						</div>
 						<div class="col-sm-2">
-							<label class="form-label" for="subvertical">Clone Dataset&nbsp;</label>
+							<label class="form-label" for="">Clone Dataset&nbsp;</label>
 							<select id="Cmbclone" class="form-select form-control">								
 							</select>
 						</div>
@@ -149,10 +149,7 @@
 
 											<div class="col-sm-4">
 												<label for="" class="form-label">Field Type&nbsp;</label>
-												<select id="FieldType" class="form-select form-control">
-													<option value="Text">Text</option>
-													<option value="Number">Number</option>
-													<option value="Date">Date</option>
+												<select id="cmbFieldType" class="form-select form-control">													
 												</select>
 											</div>
 											<div class="col-sm-4">
@@ -188,19 +185,22 @@
 </html>
 <script>
 	$(document).ready(function () {
-		$("#navhead").text("Dataset");
-		grid_datasetfield([]);
 		getGridComboList();
+		$("#navhead").text("Dataset");
+		grid_datasetfield([]);			
+	});
+	function load() {
 		if (getlocalStorage('btn_clk_val') == "Create") {
 			$("#txtmode").val(getlocalStorage('btn_clk_val'));
-			$("#txtstatus").val(data.active_status_desc);
+			$("#txtstatus").val("Active");
 		}
 		else if (getlocalStorage('btn_clk_val') == "View" || getlocalStorage('btn_clk_val') == "Edit") {
 			if (getlocalStorage("ls_pageList") != undefined) {
 				var data = getlocalStorage("ls_pageList");
+				var cat = data.dataset_category;
 				$("#txtmode").val(getlocalStorage('btn_clk_val'));
 				$("#datasetname").val(data.dataset_name);
-				$("#category").val(data.dataset_category);
+				$("#cmbcategory").val(cat);
 				$("#txtdatasetcode").val(data.datasetCode);
 				$("#txtstatus").val(data.active_status_desc);
 				$("#datasetgid").val(data.dataset_id);
@@ -226,12 +226,12 @@
 				});
 			}
 		}
-	});
+	}
 	function saveheader() {
 		debugger;
 		try {
 			var dataset_name = $("#datasetname").val();
-			var dataset_category = $("#category").val();
+			var dataset_category = $("#cmbcategory").val();
 			var dataset_code = $("#txtdatasetcode").val();
 			var action = "";
 			if ($("#txtmode").val() == "Create") {
@@ -294,6 +294,7 @@
 		$("#grid_datasetfield").kendoGrid({
 			dataSource: {
 				data: data,
+				pageSize: 10,
 				schema: {
 					model: {
 						fields: {
@@ -319,6 +320,11 @@
 			filterable: true,
 			navigatable: true,
 			pageable: true,
+			pageable: {
+				refresh: false,
+				pageSizes: true,
+				buttonCount: 5
+			},
 			columns: [{
 				command: [
 					{
@@ -329,7 +335,7 @@
 					{
 						name: "Delete",
 						id: "Delete",
-						template: "<a href=''><img src = '../Assets/images/del.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
+						template: "<a href='' onclick='myDeleteJs()' data-bs-toggle='modal'><img src = '../Assets/images/del.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
 					},
 				], title: "Action&nbsp;", width: "40px",
 			},
@@ -352,6 +358,12 @@
 			},
 			{
 				field: "field_type",
+				title: "Field Type",
+				width: 100,
+				hidden: true,
+			},
+			{
+				field: "fieldtype_desc",
 				title: "Field Type",
 				width: 100,
 			},
@@ -378,7 +390,7 @@
 	function savedetail() {
 		try {
 			var datasetfield = $("#datasetfield").val();
-			var FieldType = $("#FieldType").val();
+			var FieldType = $("#cmbFieldType").val();
 			var fieldlength = $("#fieldlength").val();
 			var dataset_code = $("#txtdatasetcode").val();
 			var action = "";
@@ -413,6 +425,7 @@
 							content: response.out_msg,
 							type: 'green',
 						});
+						load();
 					}
 					else {
 						$.alert({
@@ -439,7 +452,7 @@
 		$("#datasetfield").val(selectedItem.field_name);
 		$("#datasetdetail_id").val(selectedItem.datasetdetail_id);
 		$("#txtmodeflag").val("edit");
-		$("#FieldType").val(selectedItem.field_type);
+		$("#cmbFieldType").val(selectedItem.field_type);
 		$("#fieldlength").val(selectedItem.field_length);
 		if (selectedItem.field_mandatory == "Yes") {
 			$("#mandatory1").prop("checked", true);
@@ -489,10 +502,90 @@
 				}));
 				$.each(response, function (index, item) {
 					$("#cmbcategory").append($('<option>', {
-						value: item.master_code,
-						text: item.master_name
+						value: item.masterCode,
+						text: item.masterName
 					}));
 				});
+				load();
+			}
+		});
+		$.ajax({
+			type: "POST",
+			url: '/DataSet/getfieldtype',
+			dataType: 'json',
+			data: JSON.stringify({ }),
+			contentType: 'application/json; charset=utf-8',
+			success: function (response) {
+				$("#cmbFieldType").empty();
+				$("#cmbFieldType").append($('<option>', {
+					value: "",
+					text: "  Select  "
+				}));
+				$.each(response, function (index, item) {
+					$("#cmbFieldType").append($('<option>', {
+						value: item.fieldtype_code,
+						text: item.fieldtype_desc
+					}));
+				});
+			}
+		});	
+	}
+	function myDeleteJs() {
+		debugger;
+		var grid = $("#grid_datasetfield").data("kendoGrid");
+		var model = grid.dataItem($(event.target).closest("tr"));
+		var EmployeeID = (model.datasetdetail_id);
+
+		$.confirm({
+			icon: 'fa fa-warning',
+			title: 'Recon',
+			autoClose: 'cancel|10000',
+			theme: 'dark',
+			animationSpeed: 700,
+			content: 'Are you sure do you want to delete this record!',
+			type: 'orange',
+			buttons: {
+				confirm: function () {
+					var datasetfield = "";
+					var FieldType = "";
+					var fieldlength = "";
+					var dataset_code = "";
+					var action = "DELETE";
+					var action_by = "vijay"
+					var datasetdetail_id = EmployeeID;					
+					var status = "";
+					var mandatory = "";
+					$.ajax({
+						type: "POST",
+						url: '/DataSet/Datasetdetail',
+						dataType: 'json',
+						data: JSON.stringify({ datasetCode: dataset_code, datasetdetail_id: datasetdetail_id, field_name: datasetfield, in_action: action, in_action_by: action_by, field_length: fieldlength, field_type: FieldType, field_mandatory: mandatory }),
+						contentType: 'application/json; charset=utf-8',
+						success: function (response) {							
+								$.alert({
+									icon: 'fa fa-success',
+									title: 'Recon',
+									theme: 'dark',
+									content: 'Record deleted.!',
+									type: 'green',
+									animationSpeed: 700,
+								});							
+							setTimeout(function () {
+								window.location.reload(1);
+							}, 2500);
+						},
+					});
+				},
+				cancel: function () {
+					$.alert({
+						icon: 'fa fa-success',
+						title: 'Recon',
+						theme: 'dark',
+						content: 'Delete Canceled.!',
+						type: 'blue',
+						animationSpeed: 700,
+					});
+				},
 			}
 		});
 	}

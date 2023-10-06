@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Data;
 using System.Net.Http.Headers;
 using System.Text;
+using static Recon_proto.Controllers.CommonController;
 
 namespace Recon_proto.Controllers
 {
@@ -174,6 +175,7 @@ namespace Recon_proto.Controllers
 					objcat.datasetCode = result.Rows[i]["dataset_code"].ToString();
 					objcat.field_name = result.Rows[i]["field_name"].ToString();
 					objcat.field_type = result.Rows[i]["field_type"].ToString();
+					objcat.fieldtype_desc = result.Rows[i]["fieldtype_desc"].ToString();
 					objcat.field_length = result.Rows[i]["field_length"].ToString();
 					objcat.field_mandatory = result.Rows[i]["field_mandatory"].ToString();
 					objcat_lst.Add(objcat);
@@ -192,8 +194,47 @@ namespace Recon_proto.Controllers
 			public int datasetdetail_id { get; set; }
 			public string? field_name { get; set; }
 			public string? field_type { get; set; }
-			public string? field_length { get; set; }
+			public string? fieldtype_desc { get; set; }
+		public string? field_length { get; set; }
 			public string? field_mandatory { get; set; }
+		}
+		#endregion
+
+		[HttpPost]
+		public JsonResult getfieldtype()
+		{
+			DataTable result = new DataTable();
+			List<fieldtype> objcat_lst = new List<fieldtype>();
+			string post_data = "";
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri("https://localhost:44348/api/DataSet/");
+				client.DefaultRequestHeaders.Accept.Clear();
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+				HttpContent content = new StringContent(JsonConvert.SerializeObject(""), UTF8Encoding.UTF8, "application/json");
+				var response = client.PostAsync("getfieldtype", content).Result;
+				Stream data = response.Content.ReadAsStreamAsync().Result;
+				StreamReader reader = new StreamReader(data);
+				post_data = reader.ReadToEnd();
+				string d2 = JsonConvert.DeserializeObject<string>(post_data);
+				result = JsonConvert.DeserializeObject<DataTable>(d2);
+				for (int i = 0; i < result.Rows.Count; i++)
+				{
+					fieldtype objcat = new fieldtype();
+					objcat.fieldtype_gid = Convert.ToInt32(result.Rows[i]["fieldtype_gid"]);
+					objcat.fieldtype_code = result.Rows[i]["fieldtype_code"].ToString();
+					objcat.fieldtype_desc = result.Rows[i]["fieldtype_desc"].ToString();					
+					objcat_lst.Add(objcat);
+				}
+				return Json(objcat_lst);
+			}
+		}
+		#region field type
+		public class fieldtype
+		{
+			public string fieldtype_desc { get; set; }
+			public string fieldtype_code { get; set; }
+			public int fieldtype_gid { get; set; }
 		}
 		#endregion
 	}
