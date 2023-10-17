@@ -2,15 +2,69 @@
 	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
 
-<iframe src="http://140.238.247.210/ConnectorWeb/Connectors/" title="description" style="height: 556px;width: 98%;padding-left: 23px;padding-bottom: -5px;margin-top: -13px;border:1px white">
+<div id="connectors"></div>
+@*<embed src="http://140.238.247.210/ConnectorWeb/Connectors/" title="description" style="height: 556px;width: 98%;padding-left: 23px;padding-bottom: -5px;margin-top: -13px;border:1px white">
 
 	div.footer {
 	display: none;
 	}
-
-</iframe>
+/>*@
 <script>
 	$(document).ready(function () {
 		$("#navhead").text("Connectors");
+		//document.location = 'http://140.238.247.210/ConnectorWeb/Connectors/ConnectorsList';
+		loadContent();
 	});
+	function loadContent() {
+	
+		//var contentContainer = document.getElementById("connectors");
+		//var xhr = new XMLHttpRequest();
+		//xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+		//xhr.open("GET", "http://140.238.247.210/testcors", true);
+		//xhr.onreadystatechange = function () {
+		//	if (xhr.readyState === 4 && xhr.status === 200) {
+		//		contentContainer.innerHTML = xhr.responseText;
+		//	}
+		//};
+		//xhr.send();
+		var data = new FormData();
+
+		data.append('user', 'sachin');
+		var params = {
+			url: 'http://140.238.247.210/testcors',
+			method: 'post',
+			dataType: 'json',
+			formData: data
+		};
+		var AJAX = function (params) {
+			this.server = {};
+			this.url = params.url;
+			this.method = params.method;
+			this.dataType = params.dataType;
+			this.formData = params.formData;
+
+			this.init = function () {
+				if (typeof XMLHttpRequest != 'undefined') {
+					this.server = new XMLHttpRequest();
+
+					//Open first, before setting the request headers.
+					this.server.open(this.method, this.url, true);
+
+					//Now set the request headers.
+					this.server.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					//this.server.setRequestHeader('Content-length', this.formData.length);
+					//this.server.setRequestHeader('Connection', 'close');
+					console.log("XMLHttpRequest created.");
+					return true;
+				}
+			};
+
+			this.send = function () {
+				if (this.init()) {
+					this.server.send(this.formData);
+				}
+			};
+
+		};
+	}
 </script>
