@@ -92,12 +92,13 @@ namespace Recon_proto.Controllers
 				return Json(objList);
 			}
 		}
+
 		#region header
 		public class DatasetHeadermodel
 		{
 			public string? dataset_name { get; set; }
 			public string? datasetCode { get; set; }
-			public int dataset_id { get; set; }
+			public Int32 dataset_id { get; set; }
 			public string? dataset_category { get; set; }
 			public string? active_status { get; set; }
 			public string? in_action { get; set; }
@@ -106,7 +107,6 @@ namespace Recon_proto.Controllers
 			public string? out_result { get; set; }
 		}
 		#endregion
-
 		[HttpPost]
 		public JsonResult Datasetdetail([FromBody] Datasetdetailrmodel context)
 		{
@@ -178,6 +178,7 @@ namespace Recon_proto.Controllers
 					objcat.fieldtype_desc = result.Rows[i]["fieldtype_desc"].ToString();
 					objcat.field_length = result.Rows[i]["field_length"].ToString();
 					objcat.field_mandatory = result.Rows[i]["field_mandatory"].ToString();
+					objcat.dataset_table_field = result.Rows[i]["dataset_table_field"].ToString();
 					objcat_lst.Add(objcat);
 				}
 				return Json(objcat_lst);
@@ -195,8 +196,9 @@ namespace Recon_proto.Controllers
 			public string? field_name { get; set; }
 			public string? field_type { get; set; }
 			public string? fieldtype_desc { get; set; }
-		public string? field_length { get; set; }
+		    public string? field_length { get; set; }
 			public string? field_mandatory { get; set; }
+			public string? dataset_table_field { get; set; }
 		}
 		#endregion
 
