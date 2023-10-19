@@ -96,7 +96,7 @@
 							</select>
 						</div>
 						<div class="col-sm-2" style="margin-top:30px">
-							<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%">Clone</button>&nbsp;&nbsp;&nbsp;
+							<button type="button" class="btn btn-sm btn-success me-2" onclick="saveheader()" style="background: #38b55a;border-color: #38b55a;width:40%">Clone</button>&nbsp;&nbsp;&nbsp;
 						</div>
 
 					</div>
@@ -204,35 +204,41 @@
 				$("#txtdatasetcode").val(data.datasetCode);
 				$("#txtstatus").val(data.active_status_desc);
 				$("#datasetgid").val(data.dataset_id);
-				$.ajax({
-					type: "POST",
-					url: '/DataSet/Datasetdetailreadlist',
-					dataType: 'json',
-					data: JSON.stringify({ datasetCode: data.datasetCode }),
-					contentType: 'application/json; charset=utf-8',
-					success: function (response) {
-						if (response != null) {
-							grid_datasetfield(response);
-						}
-						else {
-							grid_datasetfield([]);
-						}
-					},
-					error: function (er) {
-						alert(er)
-						console.log(er)
-					}
-
-				});
+				detailsfetch(data.datasetCode)
 			}
 		}
 	}
+
+	function detailsfetch(datasetCode) {
+		$.ajax({
+			type: "POST",
+			url: '/DataSet/Datasetdetailreadlist',
+			dataType: 'json',
+			data: JSON.stringify({ datasetCode: datasetCode }),
+			contentType: 'application/json; charset=utf-8',
+			success: function (response) {
+				if (response != null) {
+					grid_datasetfield(response);
+				}
+				else {
+					grid_datasetfield([]);
+				}
+			},
+			error: function (er) {
+				alert(er)
+				console.log(er)
+			}
+
+		});
+	}
+
 	function saveheader() {
 		debugger;
 		try {
 			var dataset_name = $("#datasetname").val();
 			var dataset_category = $("#cmbcategory").val();
 			var dataset_code = $("#txtdatasetcode").val();
+			var clone_dataset = $("#Cmbclone").val();
 			var action = "";
 			if ($("#txtmode").val() == "Create") {
 				action = "INSERT"
@@ -254,7 +260,7 @@
 				type: "POST",
 				url: '/DataSet/Datasetheader',
 				dataType: 'json',
-				data: JSON.stringify({ dataset_name: dataset_name, dataset_category: dataset_category, datasetCode: dataset_code, in_action: action, in_action_by: action_by, dataset_id: dataset_id, active_status: status }),
+				data: JSON.stringify({ dataset_name: dataset_name, dataset_category: dataset_category, datasetCode: dataset_code, clone_dataset: clone_dataset,  in_action: action, in_action_by: action_by, dataset_id: dataset_id, active_status: status }),
 				contentType: 'application/json; charset=utf-8',
 				success: function (response) {
 					debugger;
@@ -264,6 +270,7 @@
 							content: response.out_msg,
 							type: 'green',
 						});
+						detailsfetch($("#txtdatasetcode").val());
 					}
 					else {
 
@@ -291,6 +298,7 @@
 		window.location.href = "../DataSet/DataSetList";
 	}
 	function grid_datasetfield(data) {
+		debugger;
 		$("#grid_datasetfield").kendoGrid({
 			dataSource: {
 				data: data,

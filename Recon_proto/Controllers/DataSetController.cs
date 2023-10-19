@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Newtonsoft.Json;
 using System.Data;
 using System.Net.Http.Headers;
@@ -82,14 +83,7 @@ namespace Recon_proto.Controllers
 				StreamReader reader = new StreamReader(data);
 				post_data = reader.ReadToEnd();
 				string d2 = JsonConvert.DeserializeObject<string>(post_data);
-				result = JsonConvert.DeserializeObject<DataTable>(d2);
-				for (int i = 0; i < result.Rows.Count; i++)
-				{
-					objList.dataset_id = Convert.ToInt32(result.Rows[i]["in_dataset_gid"]);
-					objList.out_msg = result.Rows[i]["out_msg"].ToString();
-					objList.out_result = result.Rows[i]["out_result"].ToString();
-				}
-				return Json(objList);
+                return Json(d2);
 			}
 		}
 		#region header
@@ -99,11 +93,11 @@ namespace Recon_proto.Controllers
 			public string? datasetCode { get; set; }
 			public int dataset_id { get; set; }
 			public string? dataset_category { get; set; }
-			public string? active_status { get; set; }
+            public string? clone_dataset { get; set; }
+            public string? active_status { get; set; }
 			public string? in_action { get; set; }
 			public string? in_action_by { get; set; }
-			public string? out_msg { get; set; }
-			public string? out_result { get; set; }
+
 		}
 		#endregion
 
