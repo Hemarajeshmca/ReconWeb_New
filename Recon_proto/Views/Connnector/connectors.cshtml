@@ -1,70 +1,86 @@
-﻿@{
+@{
 	Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
-
-<div id="connectors"></div>
-@*<embed src="http://140.238.247.210/ConnectorWeb/Connectors/" title="description" style="height: 556px;width: 98%;padding-left: 23px;padding-bottom: -5px;margin-top: -13px;border:1px white">
+@*
+<iframe src="http://140.238.247.210/ConnectorWeb/Connectors/" title="description" style="height: 556px;width: 98%;padding-left: 23px;padding-bottom: -5px;margin-top: -13px;border:1px white">
 
 	div.footer {
 	display: none;
 	}
-/>*@
+</iframe>*@
+
+<div class="row" style="margin-top:10px">
+    <div class="col-xs-12">
+
+<div id="external-content"></div>
+</div>
+</div>
+
+@*<script>$("#testLoad").load("http://140.238.247.210/ConnectorWeb/Connectors/");</script>
+<div id="testLoad"></div>*@
+
+@*<object data="http://140.238.247.210/ConnectorWeb/Connectors/" width="1400" height="1000" style="padding-left: 23px;padding-bottom: -5px;margin-top: -13px;border:1px white">
+
+</object>*@
+
+@*<body>
+    <button id="fetchData">Fetch Data from Another Application</button>
+    <div id="result"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>*@
 <script>
 	$(document).ready(function () {
 		$("#navhead").text("Connectors");
-		//document.location = 'http://140.238.247.210/ConnectorWeb/Connectors/ConnectorsList';
-		loadContent();
-	});
-	function loadContent() {
-	
-		//var contentContainer = document.getElementById("connectors");
-		//var xhr = new XMLHttpRequest();
-		//xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-		//xhr.open("GET", "http://140.238.247.210/testcors", true);
-		//xhr.onreadystatechange = function () {
-		//	if (xhr.readyState === 4 && xhr.status === 200) {
-		//		contentContainer.innerHTML = xhr.responseText;
-		//	}
-		//};
-		//xhr.send();
-		var data = new FormData();
 
-		data.append('user', 'sachin');
-		var params = {
-			url: 'http://140.238.247.210/testcors',
-			method: 'post',
-			dataType: 'json',
-			formData: data
-		};
-		var AJAX = function (params) {
-			this.server = {};
-			this.url = params.url;
-			this.method = params.method;
-			this.dataType = params.dataType;
-			this.formData = params.formData;
+        //$("#fetchData").click(function () {
+        //    // Make an AJAX GET request to the other application's API endpoint
+        //    $.get("http://140.238.247.210/testcors/ConnectorWeb/Connectors", function (data) {
+        //        // Handle the response data here
+        //        $("#result").html(data);
+        //    })
+        //        .fail(function (error) {
+        //            // Handle errors (e.g., network issues, server errors)
+        //            $("#result").html("Error: " + error.statusText);
+        //        });
+        //});
 
-			this.init = function () {
-				if (typeof XMLHttpRequest != 'undefined') {
-					this.server = new XMLHttpRequest();
+        fetch('http://localhost:5544')
+            .then(response => {
+                debugger;
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Network response was not ok');
+            })
+            .then(htmlContent => {
+                // Display the retrieved content in the designated div
+                document.getElementById('external-content').innerHTML = htmlContent;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });   
+    });
 
-					//Open first, before setting the request headers.
-					this.server.open(this.method, this.url, true);
+    
+    //document.addEventListener("DOMContentLoaded", function () {
+    //    fetchExternalContent();
+    //});
 
-					//Now set the request headers.
-					this.server.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-					//this.server.setRequestHeader('Content-length', this.formData.length);
-					//this.server.setRequestHeader('Connection', 'close');
-					console.log("XMLHttpRequest created.");
-					return true;
-				}
-			};
+    //async function fetchExternalContent() {
+    //    const externalWebsiteURL = 'http://localhost:5544/';
+    //    try {
+    //        const response = await fetch(externalWebsiteURL);
 
-			this.send = function () {
-				if (this.init()) {
-					this.server.send(this.formData);
-				}
-			};
+    //        if (!response.ok) {
+    //            throw new Error('Network response was not ok');
+    //        }
 
-		};
-	}
+    //        var htmlContent = await response.text();
+    //        document.getElementById('external-content').innerHTML = htmlContent;
+    //    } catch (error) {
+    //        console.error('Error fetching external content:', error);
+    //    }
+    //}
 </script>
