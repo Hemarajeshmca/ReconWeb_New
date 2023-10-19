@@ -109,7 +109,6 @@
 							<div class="row">
 								<div class="nav-align-top mb-3 mt-3">
 									<ul class="nav nav-pills mb-2" role="tablist">
-
 										<li class="nav-item">
 											<button type="button"
 													class="nav-link active"
@@ -374,6 +373,7 @@
 			type: "POST",
 			url: '/DataSet/Datasetdetailreadlist',
 			dataType: 'json',
+			async: false,
 			data: JSON.stringify({ datasetCode: datasetcode }),
 			contentType: 'application/json; charset=utf-8',
 			success: function (response) {
@@ -639,7 +639,7 @@
 					{
 						name: "Delete",
 						id: "Delete",
-						template: "<a href='' onclick='myDeleteJs()' data-bs-toggle='modal'><img src = '../Assets/images/del.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
+						template: "<a href='' onclick='myDeleteJsdataset()' data-bs-toggle='modal'><img src = '../Assets/images/del.png' href='../DataSet/DataSetForm'></a>&nbsp;&nbsp;&nbsp;"
 					},
 				], title: "Action&nbsp;", width: "40px",
 			},
@@ -797,11 +797,11 @@
 						id: "Edit",
 						template: "<a href='' onclick='getdatasetmapping()' value='edit'  data-bs-toggle='modal'><img src = '../Assets/images/editicons.png'></a>&nbsp;&nbsp;&nbsp;",
 					},
-					{
-						name: "Delete",
-						id: "Delete",
-						template: "<a href='' onclick='myDeleteJs()'  data-bs-toggle='modal' ><img src = '../Assets/images/del.png' href=''></a>&nbsp;&nbsp;&nbsp;"
-					},
+					//{
+					//	name: "Delete",
+					//	id: "Delete",
+					//	template: "<a href='' onclick='myDeleteJs()'  data-bs-toggle='modal' ><img src = '../Assets/images/del.png' href=''></a>&nbsp;&nbsp;&nbsp;"
+					//},
 				], title: "Action&nbsp;", width: "40px",
 			},
 			{
@@ -907,7 +907,7 @@
 		columns.push({
 			field: entryIndex + 1,
 			title: 'Action',
-			template: "<a href='' onclick='getdetailSelectedRows()' value='edit' data-bs-toggle='modal'><img src = '../Assets/images/editicons.png'></a>&nbsp;&nbsp;&nbsp;<a href='' onclick='myDeleteJs()' data-bs-toggle='modal'><img src = '../Assets/images/del.png'></a>&nbsp;&nbsp;&nbsp;",
+			template: "<a href='' onclick='getdetailSelectedRows()' value='edit' data-bs-toggle='modal'><img src = '../Assets/images/editicons.png'></a>&nbsp;&nbsp;&nbsp;",
 			filterable: false,
 			sortable: true,
 			editable: true,
@@ -991,6 +991,7 @@
 		var grid = $("#grid1").data("kendoGrid");
 		grid.hideColumn(1);
 		grid.hideColumn(2);
+		grid.hideColumn(3);
 	}
 	function getdetailSelectedRows() {
 		var grid = $("#grid1").data("kendoGrid");
@@ -1020,11 +1021,74 @@
 		});
 		$("#Datasetmappingform").modal('show');
 	}
-	function getdatasetmapping(){
+	function getdatasetmapping() {
 		var grid = $("#grid_datasetreconmapping").data("kendoGrid");
 		var selectedItem = grid.dataItem(grid.select());
-		$("#cmbdatasetmap").val(selectedItem.in_dataset_code);
+		$("#cmbdatasetmap").val(selectedItem.in_dataset_code);		
+		jQuery('#cmbdatasetmap').trigger("change");		
+		$("#Datasetmappingform").modal('show');
 		$("#cmbdatasetfieldname").val(selectedItem.dataset_table_field);
+	}
+	function myDeleteJsdataset(){
+		var grid = $("#grid_datasetrecon").data("kendoGrid");
+		var model = grid.dataItem($(event.target).closest("tr"));
+		var recondataset_gid = model.recondataset_gid;
+		$.confirm({
+			icon: 'fa fa-warning',
+			title: 'Recon',
+			autoClose: 'cancel|10000',
+			theme: 'dark',
+			animationSpeed: 700,
+			content: 'Are you sure do you want to delete this record!',
+			type: 'orange',
+			buttons: {
+				confirm: function () {
+					var reconcode = "";
+					var datasetname = "";
+					var DatasetType = "";
+					var parentdataset = "";				
+					var action = "DELETE";
+					var action_by = "vijay"
+					var in_user_code = "vijay";
+					var recondataset_gid = model.recondataset_gid;
+					var status ="";
+					$.ajax({
+						type: "POST",
+						url: '/Recon/Recondatasetsave',
+						dataType: 'json',
+						data: JSON.stringify({ in_recondataset_gid: recondataset_gid, in_recon_code: reconcode, in_dataset_code: datasetname, in_dataset_type: DatasetType, in_action: action, in_action_by: action_by, in_active_status: status, in_parent_dataset_code: parentdataset, in_user_code: in_user_code }),
+						contentType: 'application/json; charset=utf-8',
+						success: function (response) {
+							debugger;
+							if (response != null) {
+								$.alert({
+									title: 'Recon',
+									content: response.out_msg,
+									type: 'green',
+								});
+							}
+							else {
+
+							}
+						},
+						error: function (er) {
+							alert(er)
+							console.log(er)
+						}
+					});			
+				},
+				cancel: function () {
+					$.alert({
+						icon: 'fa fa-success',
+						title: 'Recon',
+						theme: 'dark',
+						content: 'Delete Canceled.!',
+						type: 'blue',
+						animationSpeed: 700,
+					});
+				},
+			}
+		});
 	}
 </script>
 
