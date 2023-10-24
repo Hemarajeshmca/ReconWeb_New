@@ -70,10 +70,33 @@ tr {
 .save_btn {
     background: #175650;
     border-color: #175650;
+    cursor: pointer;
+    color: white;
+    min-width:20%;
+}
+
+.btn-check:focus + .btn-success, .btn-success:focus, .btn-success.focus {
+color: #fff;
+background-color: #175650;
+border-color: #175650;
+}
+
+.btn-check:focus + .btn-success, .btn-success:focus, .btn-success.focus {
+    color: #fff;
+    background-color: #175650;
+    border-color: #175650;
+    color:white;
 }
 
 .cancel_btn {
     background: #ff0000;
     border-color: #ff0000;
+    cursor: pointer;
+    color: white;
+    min-width:20%;
+}
+
+.nav-align-top > .tab-content, .nav-align-right > .tab-content, .nav-align-bottom > .tab-content, .nav-align-left > .tab-content {
+    box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 9.12);
 }
 /*http: //kendo.cdn.telerik.com/2016.3.914/styles/Black/sprite.png*/
