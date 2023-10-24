@@ -191,8 +191,9 @@
 								<div class="col-sm-4"></div>
 								<div class="col-sm-4" style="margin-top:10px;">
 									<center>
-										<button type="button" class="btn btn-sm btn-success me-2" onclick="saveheader()" style="background: #38b55a;border-color: #38b55a;width:40%">Submit</button>&nbsp;&nbsp;&nbsp;
-										<a href="../Recon/ReconList" class="btn btn-sm btn-success me-2" style="background: red;border-color: red;width:40%;cursor:pointer;">Cancel</a>
+										<button type="submit" class="btn btn-sm me-2 save_btn" >Submit</button>&nbsp;&nbsp;&nbsp;
+										@*<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr7()">Cancel</button>*@
+										<a href="../Recon/ReconList" class="btn btn-sm me-2 cancel_btn">Cancel</a>
 									</center>
 								</div>
 								<div class="col-sm-4"></div>
@@ -245,10 +246,7 @@
 										</div>
 									</div>
 									<div class="col-sm-4" style="margin-top:30px;float: right;">
-										<center>
-											<button type="button" class="btn btn-sm btn-success me-2" onclick="saveDataset()" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
-											<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr1()">Cancel</button>
-										</center>
+										<center><button type="submit" class="btn btn-sm me-2 save_btn">Save</button>&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-sm cancel_btn me-2" data-bs-dismiss="modal" onclick="rr1()">Cancel</button></center>
 									</div>
 								</div>
 							</div>

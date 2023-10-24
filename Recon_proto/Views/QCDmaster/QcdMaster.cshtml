@@ -125,7 +125,7 @@
                     </div>
                     <div class="col-sm-2" style="margin-top:29px">
                         <label class="form-label"></label>
-                        <input type="button" style="background: #38b55a;border-color: #38b55a;width:40%" name="Import" class="btn btn-sm btn-success me-2" value="Start" />
+                        <input type="button" name="Import" class="btn btn-sm save_btn me-2" value="Start" />
 
                     </div>
                 </div>
@@ -214,8 +214,8 @@
                     </div>
                     <div class="col-sm-4" style="margin-top:30px;float: right;">
                         <center>
-                            <button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%" onclick="saveQcd()">Save</button>&nbsp;&nbsp;&nbsp;
-                            <button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="closeModal()">Cancel</button>
+                            <button type="submit" class="btn btn-sm save_btn me-2" onclick="saveQcd()">Save</button>&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-sm cancel_btn me-2" data-bs-dismiss="modal" onclick="closeModal()">Cancel</button>
                         </center>
                     </div>
                 </div>
@@ -331,7 +331,7 @@
                         {
                             name: "edit",
                             id: "Edit",
-                            template: "<a href='' onclick='openQCDModel()' value='edit' data-bs-toggle='modal'><img src = '../Assets/images/editicons.png'></a>   ",
+                            template: "<a href='' onclick='openQCDModel()' value='edit' data-bs-toggle='modal'><img src = '../Assets/images/editicons.png'></a> &nbsp;&nbsp;&nbsp;  ",
                         },
                         {
                             name: "Delete",

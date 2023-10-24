@@ -52,7 +52,7 @@
 <body class="hold-transition skin-blue sidebar-mini fixed">
 	<div class="content-wrapper">
 		<div class="container-xxl flex-grow-1 container-p-y">
-			<div class="card-body" style="margin-top:-12px;height: 84%;">
+			<div class="card-body" style="margin-top:-1%;min-height: 82%;">
 				<form method="post" class="form-horizontal" id="form" enctype="multipart/form-data">
 					<div class="row" style="margin-top: -18px;margin-bottom: 10px;">
 						<div class="col-sm-6">
@@ -96,7 +96,7 @@
 							</select>
 						</div>
 						<div class="col-sm-2" style="margin-top:30px">
-							<button type="button" class="btn btn-sm btn-success me-2" onclick="saveheader()" style="background: #38b55a;border-color: #38b55a;width:40%">Clone</button>&nbsp;&nbsp;&nbsp;
+							<button type="button" class="btn btn-sm me-2 save_btn" onclick="saveheader()">Clone</button>&nbsp;&nbsp;&nbsp;
 						</div>
 
 					</div>
@@ -110,12 +110,12 @@
 						</div>
 					</div>
 
-					<div class="row" style="padding-bottom:8px;padding-top:8px;padding-left:10px;padding-right:10px">
+					<div class="row" style="padding-top:8px;padding-left:10px;padding-right:10px">
 						<div class="col-sm-4">
 						</div>
-						<div class="col-sm-4" style="margin-top:2%;">
-							<button type="button" class="btn btn-sm btn-success me-2" onclick="saveheader()" style="background: #38b55a;border-color: #38b55a;width:40%">Save</button>&nbsp;&nbsp;&nbsp;
-							<a href="../DataSet/DataSetList" class="btn btn-sm btn-success me-2" style="background: red;border-color: red;width:40%;cursor:pointer;">Cancel</a>
+						<div class="col-sm-4" style="margin-top:2%;text-align:center;">
+							<button type="button" class="btn btn-sm me-2 save_btn" onclick="saveheader()">Save</button>&nbsp;&nbsp;&nbsp;
+							<a href="../DataSet/DataSetList" class="btn btn-sm me-2 cancel_btn">Cancel</a>
 						</div>
 						<div class="col-sm-4">
 						</div>
@@ -169,8 +169,8 @@
 									</div>
 									<div class="col-sm-4" style="margin-top:30px;float: right;">
 										<center>
-											<button type="submit" class="btn btn-sm btn-success me-2" style="background: #38b55a;border-color: #38b55a;width:40%" onclick="savedetail()">Save</button>&nbsp;&nbsp;&nbsp;
-											<button type="submit" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal" style="background: red;border-color: red;width:40%" onclick="rr1()">Cancel</button>
+											<button type="submit" class="btn btn-sm me-2 save_btn" onclick="savedetail()">Save</button>&nbsp;&nbsp;&nbsp;
+											<button type="submit" class="btn btn-sm me-2 cancel_btn" data-bs-dismiss="modal" onclick="rr1()">Cancel</button>
 										</center>
 									</div>
 								</div>
@@ -233,7 +233,6 @@
 	}
 
 	function saveheader() {
-		debugger;
 		try {
 			var dataset_name = $("#datasetname").val();
 			var dataset_category = $("#cmbcategory").val();
@@ -263,7 +262,6 @@
 				data: JSON.stringify({ dataset_name: dataset_name, dataset_category: dataset_category, datasetCode: dataset_code, clone_dataset: clone_dataset,  in_action: action, in_action_by: action_by, dataset_id: dataset_id, active_status: status }),
 				contentType: 'application/json; charset=utf-8',
 				success: function (response) {
-					debugger;
 					if (response != null) {
 						$.alert({
 							title: 'Recon',
@@ -294,11 +292,9 @@
 		window.location.href = "../DataSet/DataSetForm";
 	}
 	function rr7() {
-		debugger;
 		window.location.href = "../DataSet/DataSetList";
 	}
 	function grid_datasetfield(data) {
-		debugger;
 		$("#grid_datasetfield").kendoGrid({
 			dataSource: {
 				data: data,
@@ -316,7 +312,7 @@
 					}
 				}
 			},
-			height: 300,
+			height: 275,
 			groupable: false,
 			dataBound: function (e) {
 				resultData = e.sender._data;
@@ -426,7 +422,6 @@
 				data: JSON.stringify({ datasetCode: dataset_code, datasetdetail_id: datasetdetail_id, field_name: datasetfield, in_action: action, in_action_by: action_by, field_length: fieldlength, field_type: FieldType, field_mandatory: mandatory }),
 				contentType: 'application/json; charset=utf-8',
 				success: function (response) {
-					debugger;
 					if (response != null) {
 						$.alert({
 							title: 'Recon',
@@ -539,7 +534,6 @@
 		});	
 	}
 	function myDeleteJs() {
-		debugger;
 		var grid = $("#grid_datasetfield").data("kendoGrid");
 		var model = grid.dataItem($(event.target).closest("tr"));
 		var EmployeeID = (model.datasetdetail_id);

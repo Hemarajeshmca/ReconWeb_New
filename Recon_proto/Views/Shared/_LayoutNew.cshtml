@@ -179,10 +179,8 @@
 	<script src="~/Assets/assets/vendor/js/helpers.js"></script>
 	<script src="~/Assets/assets/js/config.js"></script>
 	<script src="~/Assets/assets/js/jquery.multiselect.js"></script>
-	<link rel="stylesheet" href="~/Assets/assets/css/jquery.multiselect.css" />	
-	<script src="~/scripts/jquery-confirm.min.js"></script>
-	<link href="~/Content/css/jquery-confirm.min.css" rel="stylesheet" />
-	<link href="~/Content/kendo1/2015.1.318/kendo.common.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="~/Assets/assets/css/jquery.multiselect.css" />
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -477,8 +475,8 @@
 					</div>
 
 				</nav>
-				<div class="container-xxl" style="padding-right: 20px;margin-bottom: 20px; padding-left: 20px;border-radius:20px;margin-top:-9px;">
-				</div>
+				@*<div class="container-xxl" style="padding-right: 20px;margin-bottom: 20px; padding-left: 20px;border-radius:20px;margin-top:-9px;">
+				</div>*@
 
 
 				<div class="content-wrapper">
@@ -492,176 +490,178 @@
 
 		<div class="drag-target"></div>
 	</div>
-	<script src="~/Assets/assets/vendor/libs/popper/popper.js"></script>
-	<script src="~/Assets/assets/vendor/js/bootstrap.js"></script>
-	<script src="~/Assets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-	<script src="~/Assets/assets/vendor/libs/hammer/hammer.js"></script>
-	<script src="~/Assets/assets/vendor/js/menu.js"></script>
-	<script src="~/Assets/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-	<script src="~/Assets/assets/js/main.js"></script>
-	<script src="~/Assets/assets/js/dashboards-analytics.js"></script>
-@*	<script async defer src="https://buttons.github.io/buttons.js"></script>
-*@
-	<script>
-		function openNav() {
-			$(document).ready(function () {
-				$('#layout-menu').toggleClass('active');
-				$('[data-toggle="tooltip"]').tooltip();
-			});
-		}
-	</script>
 
-	<script>
-		var maxorglvl;
-		$(document).ajaxStart(function () {
-			$('#loader').show();
-			showProgress();
-		});
-
-		$(document).ajaxStop(function () {
-			hideProgress();
-		});
-
-		$(document).ajaxError(function () {
-			hideProgress();
-		})
-
-		var spinnerVisible = false;
-		function getconcatval(mastercode) {
-
-			var master = "";
-			if (mastercode != null) {
-				master = "'" + mastercode + "'";
-			}
-			return master;
-		}
-
-		function showProgress() {
-
-			if (!spinnerVisible) {
-				$("div#spinner").fadeIn("fast");
-				spinnerVisible = true;
-			}
-		}
-		function hideProgress() {
-
-			if (spinnerVisible) {
-				var spinner = $("div#spinner");
-				spinner.stop();
-				spinner.fadeOut("fast");
-				spinnerVisible = false;
-			}
-		}
-		function kendodate_format() {
-			$(".cusDate").kendoDatePicker({
-				value: new Date(),
-				format: "dd/MM/yyyy"
-			});
-			$(".cusDate1").kendoDatePicker({
-				value: new Date(),
-				format: "yyyy-MM-dd"
-			});
-		}
-
-		function get_orgarray(_idval) {
-			function Signout() {
-
-				sessionStorage.removeItem('arr1');
-				sessionStorage.removeItem('arr2');
-				sessionStorage.removeItem('arr3');
-				sessionStorage.removeItem('arr4');
-				$.ajax({
-					type: "POST",
-					contentType: "application/json; charset=utf-8",
-					data: {},
-					dataType: "html",
-					url: '@Url.Action("Signout", "Login")',
-					success: function (data) {
-						var url = '@Url.Action("Login", "Login")'
-						window.location.href = url;
-					},
-					error: function (data) {
-						$.alert({
-							title: 'DMS',
-							content: 'Error' + data,
-							type: 'red',
-						});
-					}
-				});
-			}
-
-			function showchangepasswordscreen() {
-
-				var url = '@Url.Action("ChangePassword", "Login")'
-				window.location.href = url;
-			}
-
-
-
-			function bindmultiselectvalues(arr, _id) {
-
-				if (arr != null) {
-					$("#" + _id).empty();
-					for (var t = 0; t < arr.length; t++) {
-						var opt = new Option(arr[t].name, arr[t].value);
-						$('#' + _id).append(opt);
-						if (arr[t].checked) {
-							$(opt).attr('selected', true);
-						}
-					}
-				}
-			}
-		}
-		function testt() {
-
-			alert($('#orglvl1valO').val());
-		}
-		function btn_onClick(event) {
-			click_btn_val = "";
-			if (event != "") {
-				if (event == "Create") {
-					click_btn_val = "Create";
-				}
-				else if (event == "Edit") {
-					click_btn_val = "Edit";
-				}
-				else if (event == "View") {
-					click_btn_val = "View";
-				}
-				else
-					click_btn_val = "";
-				setlocalStorage('btn_clk_val', click_btn_val);
-				//document.location = form_list_url;
-			}
-		}
-		function setlocalStorage(key, value) {		
-			var data = "";
-			data[key] = value[0];
-			localStorage.setItem(key, JSON.stringify(value));
-		}
-
-		function getlocalStorage(key) {
-			var guid = localStorage.getItem(key);			
-			return JSON.parse(guid);
-		}
-		
-		function setColor(rows, resultData) {
-			for (var i = 0; i < rows.length; i++) {
-				var row = $(rows[i]);
-				if (resultData[i].mode_flag == "I" || resultData[i].mode_flag == "T") {
-					row.css('backgroundColor', 'lightgreen');
-				}
-				else if (resultData[i].mode_flag == "D") {
-					row.css('backgroundColor', '#ff3333');
-				}
-			}
-			var child_del = $('.k-grid-Delete').children('span:first');
-			$('.k-grid-Delete').html(child_del);
-
-			var child_copy = $('.k-grid-Copy').children('span:first');
-			$('.k-grid-Copy').html(child_copy);
-		}
-		
-	</script>
 </body>
 </html>
+
+<script src="~/Assets/assets/vendor/libs/popper/popper.js"></script>
+<script src="~/Assets/assets/vendor/js/bootstrap.js"></script>
+<script src="~/Assets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="~/Assets/assets/vendor/libs/hammer/hammer.js"></script>
+<script src="~/Assets/assets/vendor/js/menu.js"></script>
+<script src="~/Assets/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<script src="~/Assets/assets/js/main.js"></script>
+<script src="~/Assets/assets/js/dashboards-analytics.js"></script>
+@*	<script async defer src="https://buttons.github.io/buttons.js"></script>
+*@
+<script>
+	function openNav() {
+		$(document).ready(function () {
+			$('#layout-menu').toggleClass('active');
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	}
+</script>
+
+<script>
+	var maxorglvl;
+	$(document).ajaxStart(function () {
+		$('#loader').show();
+		showProgress();
+	});
+
+	$(document).ajaxStop(function () {
+		hideProgress();
+	});
+
+	$(document).ajaxError(function () {
+		hideProgress();
+	})
+
+	var spinnerVisible = false;
+	function getconcatval(mastercode) {
+
+		var master = "";
+		if (mastercode != null) {
+			master = "'" + mastercode + "'";
+		}
+		return master;
+	}
+
+	function showProgress() {
+
+		if (!spinnerVisible) {
+			$("div#spinner").fadeIn("fast");
+			spinnerVisible = true;
+		}
+	}
+	function hideProgress() {
+
+		if (spinnerVisible) {
+			var spinner = $("div#spinner");
+			spinner.stop();
+			spinner.fadeOut("fast");
+			spinnerVisible = false;
+		}
+	}
+	function kendodate_format() {
+		$(".cusDate").kendoDatePicker({
+			value: new Date(),
+			format: "dd/MM/yyyy"
+		});
+		$(".cusDate1").kendoDatePicker({
+			value: new Date(),
+			format: "yyyy-MM-dd"
+		});
+	}
+
+	function get_orgarray(_idval) {
+		function Signout() {
+
+			sessionStorage.removeItem('arr1');
+			sessionStorage.removeItem('arr2');
+			sessionStorage.removeItem('arr3');
+			sessionStorage.removeItem('arr4');
+			$.ajax({
+				type: "POST",
+				contentType: "application/json; charset=utf-8",
+				data: {},
+				dataType: "html",
+				url: '@Url.Action("Signout", "Login")',
+				success: function (data) {
+					var url = '@Url.Action("Login", "Login")'
+					window.location.href = url;
+				},
+				error: function (data) {
+					$.alert({
+						title: 'DMS',
+						content: 'Error' + data,
+						type: 'red',
+					});
+				}
+			});
+		}
+
+		function showchangepasswordscreen() {
+
+			var url = '@Url.Action("ChangePassword", "Login")'
+			window.location.href = url;
+		}
+
+
+
+		function bindmultiselectvalues(arr, _id) {
+
+			if (arr != null) {
+				$("#" + _id).empty();
+				for (var t = 0; t < arr.length; t++) {
+					var opt = new Option(arr[t].name, arr[t].value);
+					$('#' + _id).append(opt);
+					if (arr[t].checked) {
+						$(opt).attr('selected', true);
+					}
+				}
+			}
+		}
+	}
+	function testt() {
+
+		alert($('#orglvl1valO').val());
+	}
+	function btn_onClick(event) {
+		click_btn_val = "";
+		if (event != "") {
+			if (event == "Create") {
+				click_btn_val = "Create";
+			}
+			else if (event == "Edit") {
+				click_btn_val = "Edit";
+			}
+			else if (event == "View") {
+				click_btn_val = "View";
+			}
+			else
+				click_btn_val = "";
+			setlocalStorage('btn_clk_val', click_btn_val);
+			//document.location = form_list_url;
+		}
+	}
+	function setlocalStorage(key, value) {
+		var data = "";
+		data[key] = value[0];
+		localStorage.setItem(key, JSON.stringify(value));
+	}
+
+	function getlocalStorage(key) {
+		var guid = localStorage.getItem(key);
+		return JSON.parse(guid);
+	}
+
+	function setColor(rows, resultData) {
+		for (var i = 0; i < rows.length; i++) {
+			var row = $(rows[i]);
+			if (resultData[i].mode_flag == "I" || resultData[i].mode_flag == "T") {
+				row.css('backgroundColor', 'lightgreen');
+			}
+			else if (resultData[i].mode_flag == "D") {
+				row.css('backgroundColor', '#ff3333');
+			}
+		}
+		var child_del = $('.k-grid-Delete').children('span:first');
+		$('.k-grid-Delete').html(child_del);
+
+		var child_copy = $('.k-grid-Copy').children('span:first');
+		$('.k-grid-Copy').html(child_copy);
+	}
+
+</script>

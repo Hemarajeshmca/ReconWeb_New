@@ -52,12 +52,11 @@
 <body class="hold-transition skin-blue sidebar-mini fixed">
 	<div class="content-wrapper">
 		<div class="container-xxl flex-grow-1 container-p-y">
-			<div class="card-body" style="margin-top:-33px;">
-				<div class="row" style="margin-top:10px">
+			<div class="card-body" style="margin-top: -1%; min-height: 82%;">
+				<div class="row">
 					<div class="col-xs-12">
 						<a href='' onclick='getSerializedRows()' data-bs-toggle='modal'><i class="fa fa-plus cursor-pointer" aria-hidden="true" style="color:green;font-size:15px;"></i></a>
-						<div id="grid_dataset">
-						</div>
+						<div id="grid_dataset"> </div>
 					</div>
 				</div>
 			</div>
@@ -114,7 +113,7 @@
 						}
 					}
 				},
-				height: 500,
+				height: 475,
 				groupable: false,
 				dataBound: function (e) {
 					resultData = e.sender._data;
