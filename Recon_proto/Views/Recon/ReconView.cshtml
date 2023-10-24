@@ -420,7 +420,6 @@
 				if (data.until_active_flag == "Y") {
 					$('#untillactive').attr('checked', true);
 				}
-
 				$.ajax({
 					type: "POST",
 					url: '/Recon/Reconheaderfetch',
@@ -634,7 +633,7 @@
 					{
 						name: "edit",
 						id: "Edit",
-						template: "<a href='' onclick='getdetailSelectedRows()' value='edit' data-bs-toggle='modal'><img src = '../Assets/images/editicons.png'></a>&nbsp;&nbsp;&nbsp;",
+						template: "<a href='' onclick='getdatasetrecon()' value='edit' data-bs-toggle='modal'><img src = '../Assets/images/editicons.png'></a>&nbsp;&nbsp;&nbsp;",
 					},
 					{
 						name: "Delete",
@@ -1017,7 +1016,6 @@
 				alert(er)
 				console.log(er)
 			}
-
 		});
 		$("#Datasetmappingform").modal('show');
 	}
@@ -1089,6 +1087,13 @@
 				},
 			}
 		});
+	}
+	function getdatasetrecon() {
+		var grid = $("#grid_datasetrecon").data("kendoGrid");
+		var selectedItem = grid.dataItem(grid.select());
+		$("#cmbdatasetname").val(selectedItem.dataset_code);		
+		$("#DatasetType").val(selectedItem.dataset_type);
+		$("#Accountform").modal('show');
 	}
 </script>
 
