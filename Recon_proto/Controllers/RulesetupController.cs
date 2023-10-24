@@ -158,5 +158,61 @@ namespace Recon_proto.Controllers
 			}
 		}
 		#endregion
+
+		#region fetch dataset
+		public class getdataagainsRecon
+		{
+			public String? in_recon_code { get; set; }
+		}
+		[HttpPost]
+		public JsonResult rulerecondatasetfetch([FromBody] getdataagainsRecon context)
+		{
+			DataSet result = new DataSet();
+			DataTable result1 = new DataTable();
+			List<fetchRecondataset> objcat_lst = new List<fetchRecondataset>();
+			string post_data = "";
+			string d2 = "";
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri("https://localhost:44348/api/Rulesetup/");
+				client.DefaultRequestHeaders.Accept.Clear();
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+				HttpContent content = new StringContent(JsonConvert.SerializeObject(context), UTF8Encoding.UTF8, "application/json");
+				var response = client.PostAsync("getdataagainsRecon", content).Result;
+				Stream data = response.Content.ReadAsStreamAsync().Result;
+				StreamReader reader = new StreamReader(data);
+				post_data = reader.ReadToEnd();
+				d2 = JsonConvert.DeserializeObject<string>(post_data);
+				return Json(d2);
+			}
+		}
+		#endregion
+
+		#region fetch dataset
+		public class getCondition
+		{
+			public String? in_condition_type { get; set; }
+			public String? in_field_type { get; set; }
+		}
+		[HttpPost]
+		public JsonResult rulefilterfetch([FromBody] getCondition context)
+		{			
+			string post_data = "";
+			string d2 = "";
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri("https://localhost:44348/api/Rulesetup/");
+				client.DefaultRequestHeaders.Accept.Clear();
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+				HttpContent content = new StringContent(JsonConvert.SerializeObject(context), UTF8Encoding.UTF8, "application/json");
+				var response = client.PostAsync("getCondition", content).Result;
+				Stream data = response.Content.ReadAsStreamAsync().Result;
+				StreamReader reader = new StreamReader(data);
+				post_data = reader.ReadToEnd();
+				d2 = JsonConvert.DeserializeObject<string>(post_data);
+				return Json(d2);
+			}
+		}
+		#endregion
 	}
 }
